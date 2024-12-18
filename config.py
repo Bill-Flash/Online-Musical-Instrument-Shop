@@ -21,9 +21,9 @@ class Config:
     MAIL_PORT = '587'  # 发送端口为465或者587
     MAIL_USE_TLS = True  # 端口为587对应的服务
 
-    MAIL_USERNAME = '1467797958@qq.com'  # 使用者的邮箱
+    MAIL_USERNAME = 'xxx@qq.com'  # 使用者的邮箱
     MAIL_PASSWORD = 'wggwwundxegtiagf'  # 不是QQ邮箱登录密码，是QQ邮箱授权码获取，用于第三方登录验证
-    MAIL_DEFAULT_SENDER = '1467797958@qq.com'  # 默认发送者，暂时先设置为自己
+    MAIL_DEFAULT_SENDER = 'xxx@qq.com'  # 默认发送者，暂时先设置为自己
     @staticmethod
     def init_app(app):
         pass
