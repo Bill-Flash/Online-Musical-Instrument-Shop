@@ -26,10 +26,10 @@ Their main requirements are:
 	*  See and respond to communications from customers.
 
 ## User Guide
-If you would like to use our website, please refer to [User Document](./user.pdf).
+If you would like to use our website, please refer to [User Document](./docs/User_Doc.pdf).
 
 ## Maintainer Guide
-If you would like to develop websites based on our website, please refer to [System Document](./system.pdf) to know the related architecture.
+If you would like to develop websites based on our website, please refer to [System Document](./docs/System_Doc.pdf) to know the related architecture.
 
 
 ## Configure the environment
