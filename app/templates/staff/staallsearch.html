@@ -1,0 +1,197 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/allsearch.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/allsearch.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Comprehensive Search</h1>
+            </div>
+            <div class="toolbox">
+                <div class="toolbox__row row gutter-bottom-xs">
+                    <div class="toolbox__left col-12 col-lg">
+                        <div class="toolbox__left-row row row--xs gutter-bottom-xs">
+                            <div class="form-group form-group--inline col-12 col-sm-auto">
+                                <label class="form-label">Show</label>
+
+                                {# showing number #}
+                                <div class="input-group input-group--white input-group--append">
+                                    <select id="num" class="input js-input-select">
+                                        <option value="5" selected="selected">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            {# types #}
+                            <div class="form-group form-group--inline col col-sm-auto">
+                                <div class="input-group input-group--white input-group--append">
+                                    <select id="type" class="input js-input-select" data-placeholder="">
+                                        <option value="all" selected="selected">All Categories</option>
+                                    </select><span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label id="search-content" style="display: none">{{ search }}</label>
+            <div class="table-wrapper">
+                <div class="table-wrapper__content table-collapse scrollbar-thin scrollbar-visible" data-simplebar>
+                    <table class="table table--lines">
+                        <thead class="table__header">
+                        <tr class="table__header-row">
+                            <th class="d-none d-lg-table-cell">
+                                <span>ID</span>
+                            </th>
+                            <th class="table__th-sort">
+                                <span class="align-middle" id="name">Product Name</span>
+                                <span id="name-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="category">
+                                <span class="align-middle">Category</span>
+                                <span id="category-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="price">
+                                <span class="align-middle">Price</span>
+                                <span id="price-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="inventory">
+                                <span class="align-middle">Inventory</span>
+                                <span id="inventory-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="status">
+                                <span class="align-middle">Status</span>
+                                <span id="status-sort" class="sort"></span>
+                            </th>
+                            <th class="table__actions"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="mis-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper__footer">
+                    <div class="row">
+                        <div class="table-wrapper__show-result col text-grey">
+                            {#                            <span class="d-none d-sm-inline-block">Showing</span>#}
+                            {#                            1 to 10 <span class="d-none d-sm-inline-block">of 50 items</span>#}
+                        </div>
+                        <div class="table-wrapper__pagination col-auto">
+                            <ol class="pagination">
+                                <li class="pagination__item">
+                                    <button id="mi-before" class="pagination__arrow pagination__arrow--prev">
+                                        <svg class="icon-icon-keyboard-left">
+                                            <use xlink:href="#icon-keyboard-left"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li class="pagination__item">
+                                    <div id="mi-now-page" class="now-page">Now Page: 1</div>
+                                </li>
+                                <li class="pagination__item">
+                                    <input type="text" id="mi-page" value="1" class="input">
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="mi-redirect" class="button redirect">Redirect</button>
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="mi-after" class="pagination__arrow pagination__arrow--next">
+                                        <svg class="icon-icon-keyboard-right">
+                                            <use xlink:href="#icon-keyboard-right"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-wrapper" style="margin-top: 20px">
+                <div class="table-wrapper__content table-collapse scrollbar-thin scrollbar-visible" data-simplebar>
+                    <table class="table table--lines">
+                        <thead class="table__header">
+                        <tr class="table__header-row">
+                            <th class="d-none d-lg-table-cell">
+                                <span>ID</span>
+                            </th>
+                            <th class="table__th-sort" id="customer-name">
+                                <span class="align-middle">Customer Name</span>
+                                <span class="sort" id="customer-name-sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="time">
+                                <span class="align-middle">Time</span>
+                                <span class="sort" id="time-sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="total-cost">
+                                <span class="align-middle">Total Cost</span>
+                                <span class="sort" id="total-cost-sort"></span>
+                            </th>
+                            <th class="table__th-sort d-sm-table-cell" id="order-status">
+                                <span class="align-middle">Status</span>
+                                <span class="sort" id="order-status-sort"></span>
+                            </th>
+                            <th class="table__th-sort">
+                                <span class="align-middle">Priority</span>
+                            </th>
+                            <th class="table__actions"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper__footer">
+                    <div class="row">
+                        <div class="table-wrapper__show-result col text-grey">
+                        </div>
+                        <div class="table-wrapper__pagination col-auto">
+                            <ol class="pagination">
+                                <li class="pagination__item">
+                                    <button id="order-before" class="pagination__arrow pagination__arrow--prev">
+                                        <svg class="icon-icon-keyboard-left">
+                                            <use xlink:href="#icon-keyboard-left"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+
+                                <li class="pagination__item">
+                                    <div id="order-now-page" class="now-page">Now Page: 1</div>
+                                </li>
+                                <li class="pagination__item">
+                                    <input type="text" id="order-page" value="1" class="input">
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="order-redirect" class="button redirect">Redirect</button>
+                                </li>
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="order-after" class="pagination__arrow pagination__arrow--next">
+                                        <svg class="icon-icon-keyboard-right">
+                                            <use xlink:href="#icon-keyboard-right"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,823 @@
+{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+    <!-- all plugins here -->
+{#    <script src="{{ url_for('static', filename='js/vendor.js') }}"></script>#}
+{#    <!-- main js  -->#}
+{#    <script src="{{ url_for('static', filename='js/main.js') }}"></script>#}
+{##}
+{#    <script src="{{ url_for('static', filename='js/modernizr-2.8.3.min.js') }}"></script>#}
+{#    <script src="static/js/jquery-1.12.0.min.js"></script>#}
+{#    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>#}
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+{#    <script src="static/js/bootstrap.min.js"></script>#}
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>#}
+{#    <script src="{{ url_for('static', filename='js/elevetezoom.js') }}"></script>#}
+{#    <script src="{{ url_for('static', filename='js/ajax-mail.js') }}"></script>#}
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/shop.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+
+{% endblock %}
+{% block content %}
+{{ super() }}
+    <div class="shop-area pt-100 pb-100 gray-bg">
+        <div class="container">
+            <div class="row flex-row-reverse">
+            {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                <div class="col-lg-9">
+                    <div class="shop-topbar-wrapper">
+                        <div class="product-sorting-wrapper">
+                            <div class="product-show shorting-style">
+                                <label>{{ _("Showing") }}
+                                    <span>{{ (pagination.page - 1) * per_page + 1 }}-{{ pagination.page * per_page }}</span>
+                                    {{ _("of") }}
+                                    <span>{{ pagination.total }}</span>
+                                    {{ _("Results") }}
+                                </label>
+                                <select onchange="window.location = this.value ">
+                                        {% for i in range(1,5) %}
+                                            {% if per_page == i*3 %}
+                                                <option value="{{ url_for(endpoint, per_page=i*3, find = name, region = region, cate = cate, price = price) }}" selected="selected">{{ i*3 }}</option>
+                                            {% else %}
+                                                <option value="{{ url_for(endpoint, per_page=i*3, find = name, region = region, cate = cate, price = price) }}">{{ i*3 }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                    {{ request.args.get('per_page') }}
+                                </select>
+                            </div>
+                            {% if name %}
+                                    <h4>{{ _("Results") }}: <span style="color: red">{{ pagination.total }}</span>
+                                        {{ _("by matching") }} "<span style="color: red">{{ name }}</span>".</h4>
+                            {% endif %}
+                            {% if price %}
+                                    <h4>{{ _("Results") }}: <span style="color: red">{{ pagination.total }}</span>
+                                        {{ _("by matching") }} "<span style="color: red">{{ price }}</span>".</h4>
+                            {% endif %}
+                        </div>
+                        <div class="grid-list-options">
+                            <ul class="view-mode">
+
+                                <li  {% if isPage == 'True' %} class="active" {% endif %}><a href="javascript:void(0);" data-view="product-grid"><i class="ti-layout-grid4-alt"></i></a></li>
+                                <li  {% if isPage == 'False' %} class="active" {% endif %}><a href="javascript:void(0);" data-view="product-list"><i class="ti-align-justify"></i></a></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    {#  if no product is matched #}
+                        {% if products %}
+                        <div id = "page" class="grid-list-product-wrapper" {% if isPage == 'False' %} style="display: none"{% endif %}>
+                            <div class="product-view product-grid">
+
+                                <!--  goods  -->
+                                <div class="row">
+                                    {% for product in products %}
+                                        <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
+                                            <div class="product-wrapper mb-10">
+                                                <!--  picture&details  -->
+                                                <div class="product-img">
+                                                    <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                                        {% if product.product_imgs.first() %}
+                                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                                        {% else %}
+                                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a class="pic" id = "{{ products.index(product) }}" title="{{ _("Quick View") }}" data-toggle="modal" data-target="#Modal{{ product.product_id }}" href="#">
+                                                            <i class="ti-search"></i>
+                                                        </a>
+                                                        <a class="hoverAdd" title={{ _("Add To Cart") }}>
+                                                            <i class="ti-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-action-wishlist">
+                                                        <a title={{ _("Consult") }} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h4><a href="{{ url_for( 'customer.product_detail', pro_id = product.product_id) }}">{{ product.name_chinese }}</a></h4>
+                                                    <!--  Price  -->
+                                                    <div class="product-price">
+                                                        <span class="new">${{ product.product_price }}</span>
+    {#                                                    <span class="old">$50.00</span>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- pagination for product -->
+                                <div class="pagination-style text-center mt-10">
+                                    <ul>
+                                        <li>
+                                            <a  href="{% if pagination.has_prev %}{{ url_for(endpoint,
+                                            page = pagination.page - 1, per_page = per_page, find = name, region = region, price = price) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-left"></i></a>
+                                        </li>
+                                        {% for p in pagination.iter_pages(left_edge=1, left_current=1, right_edge=1, right_current=2) %}
+                                            {%if p%}
+                                                {% if p == pagination.page %}
+                                                    <li >
+                                                        <a class="active" href="{{ url_for(endpoint, page = p, per_page = per_page, find = name, region = region, cate = cate, price = price) }}">{{ p }}</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                            <a href="{{ url_for(endpoint, page = p, per_page = per_page, find = name, region = region, cate = cate, price = price) }}">{{ p }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% else %}
+                                                <li class="disabled"><a href="javascript:void(0);">&hellip;</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <li>
+                                            <a href="{% if pagination.has_next %}{{ url_for(endpoint,
+                                            page = pagination.page + 1, per_page = per_page, find = name, region = region, price = price) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-right"></i></a>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div id = "list" class="grid-list-product-wrapper" {% if isPage == 'True' %} style="display: none"{% endif %}>
+
+                            <div class="product-view product-list">
+                            <!--  goods  -->
+                                <div class="row">
+                                    {% for product in products %}
+                                        <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
+                                            <div class="product-wrapper mb-10">
+                                                <!--  picture&details  -->
+                                                <div class="product-img">
+                                                    <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                                        {% if product.product_imgs.first() %}
+                                                            <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                                        {% else %}
+                                                            <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a title={{ _("Quick View") }} data-toggle="modal" data-target="#exampleModal" href="#">
+                                                            <i class="ti-search"></i>
+                                                        </a>
+                                                        <a title={{ _("Add To Cart") }} href="#">
+                                                            <i class="ti-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-action-wishlist">
+                                                        <a title={{ _("Consult") }} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-list-content">
+                                                    <h4><a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">{{ product.name_chinese }}</a></h4>
+                                                    <div class="product-price">
+                                                        <span class="new">${{ product.product_price }}</span>
+                                                    </div>
+    {#                                                <p>{{ product.product_description }}</p>#}
+                                                    <br>
+                                                    <br>
+{#                                                    <div class="product-rating">#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                    </div>#}
+                                                    <div class="product-list-action">
+                                                        <div class="product-list-action-left">
+                                                            <a id="{{ product.product_id }}" class="addtocart-btn" title="{{ _("Add to cart") }}" href="javascript:void(0);"><i class="icon-bag"></i>
+                                                                {{ _("Add to cart")}}</a>
+                                                        </div>
+                                                        <div class="product-list-action-right">
+                                                            <a title={{ _("Consult") }} href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+{#                                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#"><i class="ti-plus"></i></a>#}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                        <!-- pagination for product -->
+                        <div class="pagination-style text-center mt-10">
+                            <ul>
+                                <li>
+                                    <a  href="{% if pagination.has_prev %}{{ url_for(endpoint, isPage = False,
+                                                   page = pagination.page - 1, per_page = per_page, cate = cate,
+                                                    price = price, region = region) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-left"></i></a>
+                                </li>
+                                {% for p in pagination.iter_pages(left_edge=1, left_current=1, right_edge=1, right_current=2) %}
+                                    {%if p %}
+                                        {% if p == pagination.page %}
+                                            <li >
+                                                <a class="active" href="{{ url_for(endpoint, page = p, per_page = per_page, isPage = 'False', cate = cate, region = region, price = price) }}">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{{ url_for(endpoint, page = p, per_page = per_page, isPage = 'False', cate = cate, region = region, price = price) }}">{{ p }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% else %}
+                                        <li class="disabled"><a href="javascript:void(0);">&hellip;</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                <li>
+                                    <a href="{% if pagination.has_next %}{{ url_for(endpoint,
+                                    page = pagination.page + 1, per_page = per_page, isPage = 'False', cate = cate, region = region) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-right"></i></a>
+                                </li>
+                            </ul>
+                            <br>
+                        </div>
+                    </div>
+                    </div>
+                        {% else %}
+                            <h1>{{ _("No matching product, please search again!")}}</h1>
+                        {% endif %}
+
+                </div>
+                <!-- Side Bar -->
+                <div class="col-lg-3">
+                    <div class="shop-sidebar">
+                        <div class="shop-widget">
+                            <h4 class="shop-sidebar-title">{{ _("Search Products") }}</h4>
+                            <div class="shop-search mt-25 mb-50">
+                                <form class="shop-search-form">
+                                    <input type="text" placeholder="{{ _("Find a product") }}" name="find" value="{% if name %}{{ name }}{% endif %}">
+                                    <button type="submit">
+                                        <i class="icon-magnifier"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="shop-widget">
+                            <h4 class="shop-sidebar-title">{{ _("Filter By Price") }}</h4>
+                             <div class="price_filter mt-25">
+                                <div id="slider-range"></div>
+                                    <form >
+                                <div class="price_slider_amount">
+                                    <div class="label-input">
+                                        <label>{{ _("price") }} : </label>
+                                        <input type="text" id="amount" name="price"  placeholder="{{ _("Add Your Price") }}" />
+                                    </div>
+                                    <button type="submit">{{ _("Filter") }}</button>
+                                </div>
+                                    </form>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-50">
+                            <h4 class="shop-sidebar-title category">{{ _("Western") }} </h4>
+                             <div class="shop-list-style mt-20">
+                                <ul>
+                                    {% for kind in category['Western'] %}
+                                        <li id="{{ kind }}"><a href="{{ url_for('customer.shop_page_for_category', cate = kind) }}">
+                                            {{ kind.category_chinese }}
+                                            <span>18</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-50">
+                            <h4 class="shop-sidebar-title category">{{ _("Chinese") }} </h4>
+                             <div class="shop-list-style mt-20">
+                                <ul>
+                                    {% for kind in category['Chinese'] %}
+                                        <li id="{{ kind }}"><a href="{{ url_for('customer.shop_page_for_category', cate = kind) }}">
+                                                {{ kind.category_chinese }}
+                                            <span>18</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-lg-9">
+                    <div class="shop-topbar-wrapper">
+                        <div class="product-sorting-wrapper">
+                            <div class="product-show shorting-style">
+                                <label>{{ _("Showing") }}
+                                    <span>{{ (pagination.page - 1) * per_page + 1 }}-{{ pagination.page * per_page }}</span>
+                                    {{ _("of") }}
+                                    <span>{{ pagination.total }}</span>
+                                    {{ _("Results") }}
+                                </label>
+                                <select onchange="window.location = this.value ">
+                                        {% for i in range(1,5) %}
+                                            {% if per_page == i*3 %}
+                                                <option value="{{ url_for(endpoint, per_page=i*3, find = name, region = region, cate = cate, price = price) }}" selected="selected">{{ i*3 }}</option>
+                                            {% else %}
+                                                <option value="{{ url_for(endpoint, per_page=i*3, find = name, region = region, cate = cate, price = price) }}">{{ i*3 }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                    {{ request.args.get('per_page') }}
+                                </select>
+                            </div>
+                            {% if name %}
+                                    <h4>{{ _("Results") }}: <span style="color: red">{{ pagination.total }}</span>
+                                        {{ _("by matching") }} "<span style="color: red">{{ name }}</span>".</h4>
+                            {% endif %}
+                            {% if price %}
+                                    <h4>{{ _("Results") }}: <span style="color: red">{{ pagination.total }}</span>
+                                        {{ _("by matching") }} "<span style="color: red">{{ price }}</span>".</h4>
+                            {% endif %}
+                        </div>
+                        <div class="grid-list-options">
+                            <ul class="view-mode">
+
+                                <li  {% if isPage == 'True' %} class="active" {% endif %}><a href="javascript:void(0);" data-view="product-grid"><i class="ti-layout-grid4-alt"></i></a></li>
+                                <li  {% if isPage == 'False' %} class="active" {% endif %}><a href="javascript:void(0);" data-view="product-list"><i class="ti-align-justify"></i></a></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    {#  if no product is matched #}
+                        {% if products %}
+                        <div id = "page" class="grid-list-product-wrapper" {% if isPage == 'False' %} style="display: none"{% endif %}>
+                            <div class="product-view product-grid">
+
+                                <!--  goods  -->
+                                <div class="row">
+                                    {% for product in products %}
+                                        <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
+                                            <div class="product-wrapper mb-10">
+                                                <!--  picture&details  -->
+                                                <div class="product-img">
+                                                    <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                                        {% if product.product_imgs.first() %}
+                                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                                        {% else %}
+                                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a class="pic" id = "{{ products.index(product) }}" title="{{ _("Quick View") }}" data-toggle="modal" data-target="#Modal{{ product.product_id }}" href="#">
+                                                            <i class="ti-search"></i>
+                                                        </a>
+                                                        <a class="hoverAdd" title="{{ _("Add To Cart") }}">
+                                                            <i class="ti-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-action-wishlist">
+                                                        <a title={{ _("Consult") }} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h4><a href="{{ url_for( 'customer.product_detail', pro_id = product.product_id) }}">{{ product.product_name }}</a></h4>
+                                                    <!--  Price  -->
+                                                    <div class="product-price">
+                                                        <span class="new">${{ product.product_price }}</span>
+    {#                                                    <span class="old">$50.00</span>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- pagination for product -->
+                                <div class="pagination-style text-center mt-10">
+                                    <ul>
+                                        <li>
+                                            <a  href="{% if pagination.has_prev %}{{ url_for(endpoint,
+                                            page = pagination.page - 1, per_page = per_page, find = name, region = region, price = price) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-left"></i></a>
+                                        </li>
+                                        {% for p in pagination.iter_pages(left_edge=1, left_current=1, right_edge=1, right_current=2) %}
+                                            {%if p%}
+                                                {% if p == pagination.page %}
+                                                    <li >
+                                                        <a class="active" href="{{ url_for(endpoint, page = p, per_page = per_page, find = name, region = region, cate = cate, price = price) }}">{{ p }}</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                            <a href="{{ url_for(endpoint, page = p, per_page = per_page, find = name, region = region, cate = cate, price = price) }}">{{ p }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% else %}
+                                                <li class="disabled"><a href="javascript:void(0);">&hellip;</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <li>
+                                            <a href="{% if pagination.has_next %}{{ url_for(endpoint,
+                                            page = pagination.page + 1, per_page = per_page, find = name, region = region, price = price) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-right"></i></a>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div id = "list" class="grid-list-product-wrapper" {% if isPage == 'True' %} style="display: none"{% endif %}>
+
+                            <div class="product-view product-list">
+                            <!--  goods  -->
+                                <div class="row">
+                                    {% for product in products %}
+                                        <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
+                                            <div class="product-wrapper mb-10">
+                                                <!--  picture&details  -->
+                                                <div class="product-img">
+                                                    <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                                        {% if product.product_imgs.first() %}
+                                                            <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                                        {% else %}
+                                                            <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a title={{ _("Quick View") }} data-toggle="modal" data-target="#exampleModal" href="#">
+                                                            <i class="ti-search"></i>
+                                                        </a>
+                                                        <a title="{{ _("Add To Cart") }}" href="#">
+                                                            <i class="ti-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-action-wishlist">
+                                                        <a title={{ _("Consult") }} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-list-content">
+                                                    <h4><a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">{{ product.product_name }}</a></h4>
+                                                    <div class="product-price">
+                                                        <span class="new">${{ product.product_price }}</span>
+                                                    </div>
+    {#                                                <p>{{ product.product_description }}</p>#}
+                                                    <br>
+                                                    <br>
+{#                                                    <div class="product-rating">#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                        <i class="ion-star theme-color"></i>#}
+{#                                                    </div>#}
+                                                    <div class="product-list-action">
+                                                        <div class="product-list-action-left">
+                                                            <a id="{{ product.product_id }}" class="addtocart-btn" title="{{ _("Add to cart") }}" href="javascript:void(0);"><i class="icon-bag"></i>
+                                                                {{ _("Add to cart")}}</a>
+                                                        </div>
+                                                        <div class="product-list-action-right">
+                                                            <a title={{ _("Consult") }} href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+{#                                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#"><i class="ti-plus"></i></a>#}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                        <!-- pagination for product -->
+                        <div class="pagination-style text-center mt-10">
+                            <ul>
+                                <li>
+                                    <a  href="{% if pagination.has_prev %}{{ url_for(endpoint, isPage = False,
+                                                   page = pagination.page - 1, per_page = per_page, cate = cate,
+                                                    price = price, region = region) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-left"></i></a>
+                                </li>
+                                {% for p in pagination.iter_pages(left_edge=1, left_current=1, right_edge=1, right_current=2) %}
+                                    {%if p %}
+                                        {% if p == pagination.page %}
+                                            <li >
+                                                <a class="active" href="{{ url_for(endpoint, page = p, per_page = per_page, isPage = 'False', cate = cate, region = region, price = price) }}">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{{ url_for(endpoint, page = p, per_page = per_page, isPage = 'False', cate = cate, region = region, price = price) }}">{{ p }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% else %}
+                                        <li class="disabled"><a href="javascript:void(0);">&hellip;</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                <li>
+                                    <a href="{% if pagination.has_next %}{{ url_for(endpoint,
+                                    page = pagination.page + 1, per_page = per_page, isPage = 'False', cate = cate, region = region) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-right"></i></a>
+                                </li>
+                            </ul>
+                            <br>
+                        </div>
+                    </div>
+                    </div>
+                        {% else %}
+                            <h1>{{ _("No matching product, please search again!")}}</h1>
+                        {% endif %}
+
+                </div>
+                <!-- Side Bar -->
+                <div class="col-lg-3">
+                    <div class="shop-sidebar">
+                        <div class="shop-widget">
+                            <h4 class="shop-sidebar-title">{{ _("Search Products") }}</h4>
+                            <div class="shop-search mt-25 mb-50">
+                                <form class="shop-search-form">
+                                    <input type="text" placeholder="{{ _("Find a product") }}" name="find" value="{% if name %}{{ name }}{% endif %}">
+                                    <button type="submit">
+                                        <i class="icon-magnifier"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="shop-widget">
+                            <h4 class="shop-sidebar-title">{{ _("Filter By Price") }}</h4>
+                             <div class="price_filter mt-25">
+                                <div id="slider-range"></div>
+                                    <form>
+                                <div class="price_slider_amount">
+                                    <div class="label-input">
+                                        <label>{{ _("price") }} : </label>
+                                        <input type="text" id="amount" name="price"  placeholder="{{ _("Add Your Price") }}" />
+                                    </div>
+                                    <button id="amountButton" type="submit">{{ _("Filter") }}</button>
+                                </div>
+                                    </form>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-50">
+                            <h4 class="shop-sidebar-title category">{{ _("Western") }} </h4>
+                             <div class="shop-list-style mt-20">
+                                <ul>
+                                    {% for kind in category['Western'] %}
+                                        <li id="{{ kind }}"><a href="{{ url_for('customer.shop_page_for_category', cate = kind) }}">
+                                                {{ kind }}
+                                            <span>18</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-50">
+                            <h4 class="shop-sidebar-title category">{{ _("Chinese") }} </h4>
+                             <div class="shop-list-style mt-20">
+                                <ul>
+                                    {% for kind in category['Chinese'] %}
+                                        <li id="{{ kind }}"><a href="{{ url_for('customer.shop_page_for_category', cate = kind) }}">
+
+
+                                                {{ kind }}
+
+                                            <span>18</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for more details -->
+    {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+        {% for product in products %}
+        <div class="modal fade count+{{ count }}" id="Modal{{ product.product_id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="ti-close" aria-hidden="true"></span>
+            </button>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="qwick-view-left">
+                            <div class="quick-view-learg-img">
+                                <div class="quick-view-tab-content tab-content" id="{{ product.product_id }}">
+                                    <div class="tab-pane active show fade" id="modal{{ products.index(product) }}img" role="tabpanel">
+                                        <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                            {% if product.product_imgs.first() %}
+                                                <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quick-view-list nav" role="tablist">
+                                <a class="active" href="#modal{{ products.index(product) }}img" data-toggle="tab" role="tab">
+                                    {% if product.product_imgs.first() %}
+                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="qwick-view-right">
+                            <div class="qwick-view-content">
+                                <h3>{{ product.name_chinese }}</h3>
+                                <div class="product-price">
+                                    <span>${{ product.product_price }}</span>
+                                </div>
+                                <div class="product-rating">
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                </div>
+                                {% if product.product_inventory | int < 10 %}
+                                    <p style="color:red;">{{ _("Stock Shortage")}}!!</p>
+                                    <p style="color: red;">{{ _("Inventory") }}: {{ product.product_inventory }}</p>
+                                {% else %}
+                                    <div class="in-stock">
+                                        <span><i class="ion-android-checkbox-outline"></i> {{ _("In Stock") }}: {{ product.product_inventory }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="quick-view-select">
+    {#                                <div class="select-option-part">#}
+    {#                                    <label>Size*</label>#}
+    {#                                    <select class="select">#}
+    {#                                        <option value="">- Please Select -</option>#}
+    {#                                        <option value="">XS</option>#}
+    {#                                        <option value="">S</option>#}
+    {#                                        <option value="">M</option>#}
+    {#                                        <option value=""> L</option>#}
+    {#                                        <option value="">XL</option>#}
+    {#                                        <option value="">XXL</option>#}
+    {#                                    </select>#}
+    {#                                </div>#}
+    {#                                <div class="select-option-part">#}
+    {#                                    <label>Color*</label>#}
+    {#                                    <select class="select">#}
+    {#                                        <option value="">- Please Select -</option>#}
+    {#                                        <option value="">orange</option>#}
+    {#                                        <option value="">pink</option>#}
+    {#                                        <option value="">yellow</option>#}
+    {#                                    </select>#}
+    {#                                </div>#}
+                                </div>
+                                <div class="product-rating">
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                </div>
+                                <div class="quickview-plus-minus">
+                                    <div class="cart-plus-minus">
+                                        <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                    </div>
+                                    <div class="quickview-btn-cart">
+                                        <button id="addToCart_quickView" class="btn btn-outline-secondary quickView-add" >
+                                            {{ _("Add to cart") }}</button>
+                                    </div>
+                                    <div class="quickview-btn-wishlist">
+                                        <a class="btn-hover" title="{{ _("Consult") }}" href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; width:50%;bottom: 0;">
+                    <div id="modalToast" class="toast hide special" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                        <div class="toast-header">
+                            <img src="..." class="rounded mr-2" alt="...">
+                            <strong class="mr-auto">Notification</strong>
+                            <small></small>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <div class="toast-body" >
+                      Hello, world! This is a toast message.
+                    </div>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        {% for product in products %}
+        <div class="modal fade count+{{ count }}" id="Modal{{ product.product_id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="ti-close" aria-hidden="true"></span>
+            </button>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="qwick-view-left">
+                            <div class="quick-view-learg-img">
+                                <div class="quick-view-tab-content tab-content" id="{{ product.product_id }}">
+                                    <div class="tab-pane active show fade" id="modal{{ products.index(product) }}img" role="tabpanel">
+                                        <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                            {% if product.product_imgs.first() %}
+                                                <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quick-view-list nav" role="tablist">
+                                <a class="active" href="#modal{{ products.index(product) }}img" data-toggle="tab" role="tab">
+                                    {% if product.product_imgs.first() %}
+                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="qwick-view-right">
+                            <div class="qwick-view-content">
+                                <h3>{{ product.product_name }}</h3>
+                                <div class="product-price">
+                                    <span>${{ product.product_price }}</span>
+                                </div>
+                                <div class="product-rating">
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                </div>
+                                {% if product.product_inventory | int < 10 %}
+                                    <p style="color:red;">{{ _("Stock Shortage")}}!!</p>
+                                    <p style="color: red;">{{ _("Inventory") }}: {{ product.product_inventory }}</p>
+                                {% else %}
+                                    <div class="in-stock">
+                                        <span><i class="ion-android-checkbox-outline"></i> {{ _("In Stock") }}: {{ product.product_inventory }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="quick-view-select">
+    {#                                <div class="select-option-part">#}
+    {#                                    <label>Size*</label>#}
+    {#                                    <select class="select">#}
+    {#                                        <option value="">- Please Select -</option>#}
+    {#                                        <option value="">XS</option>#}
+    {#                                        <option value="">S</option>#}
+    {#                                        <option value="">M</option>#}
+    {#                                        <option value=""> L</option>#}
+    {#                                        <option value="">XL</option>#}
+    {#                                        <option value="">XXL</option>#}
+    {#                                    </select>#}
+    {#                                </div>#}
+    {#                                <div class="select-option-part">#}
+    {#                                    <label>Color*</label>#}
+    {#                                    <select class="select">#}
+    {#                                        <option value="">- Please Select -</option>#}
+    {#                                        <option value="">orange</option>#}
+    {#                                        <option value="">pink</option>#}
+    {#                                        <option value="">yellow</option>#}
+    {#                                    </select>#}
+    {#                                </div>#}
+                                </div>
+                                <div class="product-rating">
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                    <i class="ion-star theme-color"></i>
+                                </div>
+                                <div class="quickview-plus-minus">
+                                    <div class="cart-plus-minus">
+                                        <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                    </div>
+                                    <div class="quickview-btn-cart">
+                                        <button id="addToCart_quickView" class="btn btn-outline-secondary quickView-add" >
+                                            {{ _("Add to cart") }}</button>
+                                    </div>
+                                    <div class="quickview-btn-wishlist">
+                                        <a class="btn-hover" title="{{ _("Consult") }}" href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; width:50%;bottom: 0;">
+                    <div id="modalToast" class="toast hide special" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                        <div class="toast-header">
+                            <img src="..." class="rounded mr-2" alt="...">
+                            <strong class="mr-auto">Notification</strong>
+                            <small></small>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <div class="toast-body" >
+                      Hello, world! This is a toast message.
+                    </div>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

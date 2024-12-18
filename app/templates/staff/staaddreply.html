@@ -1,0 +1,45 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/addreply.css') }}">
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Add Reply</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+                        <form class="add-product__form" action="/staff/addreply" enctype="multipart/form-data"
+                              method="post">
+                            {{ form.hidden_tag() }}
+                            <div class="add-product__row" style="display: flex">
+                                <div class="add-product__right">
+                                    <div class="row row--md">
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Question(English Version)</label>
+                                            <div class="input-group">
+                                                {{ form.question(class="input", placeholder="", required="required", type="text", value="") }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Answer(English Version)</label>
+                                            {{ form.answer(class="input", required="") }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                       {{ form.submit(class="button button--primary button--block", id="submit", type="submit", value="Create") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock %}
+

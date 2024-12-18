@@ -1,0 +1,878 @@
+{% extends "customerNav.html" %}
+{% block content %}
+    <!-- banner start -->
+    <div class="banner-area style-one" style="background-image: url('../static/img/banner/bg.png')">
+        <div class="container">
+            <div class="banner-slider-1 owl-carousel">
+                <div class="item">
+                    <div class="banner-inner-wrap">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-5">
+                                <div class="banner-inner">
+                                    <h1>VERY <br> {{ _("MUSIC") }}</h1>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-7 offset-md-1">
+                                <div class="thumb text-right">
+                                    <img src="static/img/banner/2(1).png" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="banner-inner-wrap">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-5">
+                                <div class="banner-inner">
+                                    <h1>VERY <br> {{ _("MUSIC") }}</h1>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-7 offset-md-1">
+                                <div class="thumb text-right">
+                                    <img src="static/img/banner/2(1).png" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-counter"></div>
+        <div class="contact">
+            <span class="phone">+123 4567 890 123</span>
+            <span>VERY COMPANY</span>
+        </div>
+    </div>
+    <!-- banner end -->
+
+    <div style="background-image: url('../static/img/bg/1.jpg')">
+        <!-- about area start -->
+        <div class="about-area pd-top-105">
+            <div class="about-bg-image">
+                <img class="about-bg-1" height="700px" src="static/img/about/1.png" alt="img">
+                <img class="about-bg-2" height="700px" src="static/img/about/2.png" alt="img">
+            </div>
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2 class="title">{{ _("ABOUT US") }}</h2>
+                    <p class="sub-title">{{ _("We have carefully selected great instruments from around the world.")}}</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="thumb">
+                            <img src="static/img/about/3.gif" alt="img">
+                        </div>
+                    </div>
+                    <div class="col-md-6 align-self-center">
+                        <div class="about-inner text-center text-md-left">
+                            <p>{{ _("Since the middle and the end of the 19th century, Europe has seen the rise of the retro style,
+                                             and the splendid ancient architectural clusters in European cities. ")}} </p>
+                            <a href="/about_us">{{ _("Read More") }} <i class="la la-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- about area end-->
+
+        <!-- our coffee end-->
+        <div class="our-coffee-area pt-5 pd-bottom-135">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2 class="title">{{ _("OUR PRODUCT") }}</h2>
+                    <p class="sub-title">{{ _("Instruments are committed to positively impacting the quality of life") }}</p>
+                </div>
+                <div class="coffee-area-slider owl-carousel">
+                {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                    {%   for product in products %}
+                    <div class="item">
+                        <div class="single-coffee-inner text-center">
+                            <div class="thumb">
+                                <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="img">
+                            </div>
+                            <div class="details">
+                                <h2>{{ product.name_chinese }}</h2>
+                                <h4>
+                                    {% if product.product_region == 'Chinese' %}
+                                        民族乐器
+                                    {% else %}
+                                        西洋乐器
+                                    {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {%   for product in products %}
+                    <div class="item">
+                        <div class="single-coffee-inner text-center">
+                            <div class="thumb">
+                                <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(product.product_imgs.first().img_path)) }}" alt="img">
+                            </div>
+                            <div class="details">
+                                <h2>{{ product.product_name }}</h2>
+                                <h4>{{ product.product_region }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- our coffee end-->
+    </div>
+
+    <!-- serve area start-->
+    <div class="serve-area pd-top-105 pd-bottom-150 jarallax" style="background-image: url('../static/img/bg/2.png')">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="section-title style-two text-center mb-5">
+                        <h2 class="title">{{ _("WE SERVE") }}</h2>
+                        <p class="sub-title">{{ _("We have carefully selected great instruments from around the world.") }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="left-border-thumb">
+                        <img src="static/img/other/1(1).gif" alt="img" width="700px" height="350px">
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 align-self-center">
+                    <div class="about-inner style-two pl-xl-3 text-center text-md-left mt-5 mb-mt-0">
+                        <h2>{{ _("Western <br> Instrument") }}</h2>
+                        <p>{{ _("Since the middle and the end of the 19th century, Europe has seen the rise of the retro style,
+                                             and the splendid ancient architectural clusters in European cities. ")}} </p>
+                        <a href="{{ url_for('customer.shop_page_for_region', region = 'Western') }}">{{ _("Read More") }} <i class="la la-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-5">
+                <div class="col-lg-6 col-md-6 order-md-12">
+                    <div class="left-border-thumb">
+                        <img src="static/img/other/2(1).gif" alt="img" width="700px" height="350px">
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 order-md-11 align-self-center">
+                    <div class="about-inner style-two pr-xl-3 text-center text-md-left mt-5 mb-mt-0">
+                        <h2>{{ _("Chinese <br> Instrument") }}</h2>
+                        <p>{{ _("The guzheng is an ancient Han Chinese musical instrument that flourished in the Qin Dynasty
+                         during the Warring States period and has a history of over 2,500 years.")}} </p>
+                        <a href="{{ url_for('customer.shop_page_for_region', region = 'Chinese') }}">{{ _("Read More") }} <i class="la la-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- serve area end-->
+
+    <!-- favorite area start-->
+    <div style="background-image: url('../static/img/bg/1.jpg')">
+
+{#        <div class="favorite-area pd-top-85">#}
+{#            <div class="container">#}
+{#                <div class="section-title text-center">#}
+{#                    <h2 class="title">{{ _("Various Music Instruments") }}</h2>#}
+{#                </div>#}
+{#                <div class="favorite-coffee-wrap">#}
+{#                    <img class="h1-favorite-coffee-img" src="static/img/bg/10.png" alt="img" width="1200px">#}
+{#                    <div class="cfs-tabs-wrap text-center">#}
+{#                        <ul class="nav nav-tabs cfs-tabs" id="myTab" role="tablist">#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link active" data-toggle="tab" href="#tab_one" role="tab" aria-controls="tab_one" aria-selected="true">Violin</a>#}
+{#                            </li>#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-toggle="tab" href="#tab_two" role="tab" aria-controls="tab_two" aria-selected="false">Piano</a>#}
+{#                            </li>#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-toggle="tab" href="#tab_three" role="tab" aria-controls="tab_three" aria-selected="false">Guitar</a>#}
+{#                            </li>#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-toggle="tab" href="#tab_four" role="tab" aria-controls="tab_four" aria-selected="false">Lute</a>#}
+{#                            </li>#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-toggle="tab" href="#tab_five" role="tab" aria-controls="tab_five" aria-selected="false">Zither</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                    <div class="tab-content cfs-tab-content" id="myTabContent">#}
+{#                        <div class="tab-pane fade show active" id="tab_one" role="tabpanel">#}
+{#                            <div class="favorite-coffee-inner">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="single-favorite-coffee">#}
+{#                                            <div class="media">#}
+{#                                                <div class="media-left">#}
+{#                                                    <img width="152px" src="{{ url_for('static', filename = 'img/product/pic/2022041223280_233046201.jpg') }}" alt="img">#}
+{#                                                </div>#}
+{#                                                <div class="media-body align-self-center">#}
+{#                                                    <h5>Guitar1</h5>#}
+{#                                                    <p>Very Good Guitar</p>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="tab_two" role="tabpanel">#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/3.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE ESPRESSO</h5>#}
+{#                                                <p>Espresso brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/5.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE FLAT WHITE</h5>#}
+{#                                                <p>Flat White brewed coffee Flat White</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE CAPPUCCINO</h5>#}
+{#                                                <p>Cappuccino coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/6.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LONG BLACK</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed black</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/4.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LATTE DALGONA</h5>#}
+{#                                                <p>Dalgona brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Caffee brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="tab_three" role="tabpanel">#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/5.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LONG BLACK</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed black</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/6.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LATTE DALGONA</h5>#}
+{#                                                <p>Dalgona brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE FLAT WHITE</h5>#}
+{#                                                <p>Flat White brewed coffee Flat White</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/4.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE CAPPUCCINO</h5>#}
+{#                                                <p>Cappuccino coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/3.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE ESPRESSO</h5>#}
+{#                                                <p>Espresso brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Caffee brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="tab_four" role="tabpanel">#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/3.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE ESPRESSO</h5>#}
+{#                                                <p>Espresso brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/4.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE FLAT WHITE</h5>#}
+{#                                                <p>Flat White brewed coffee Flat White</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE CAPPUCCINO</h5>#}
+{#                                                <p>Cappuccino coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/5.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LONG BLACK</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed black</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/6.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LATTE DALGONA</h5>#}
+{#                                                <p>Dalgona brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Caffee brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="tab_five" role="tabpanel">#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/6.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LATTE DALGONA</h5>#}
+{#                                                <p>Dalgona brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/5.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Caffee brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/4.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/3.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE CAPPUCCINO</h5>#}
+{#                                                <p>Cappuccino coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/2.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE LATTE</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed milk</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/1.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE ESPRESSO</h5>#}
+{#                                                <p>Espresso brewed coffee and steamed</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/4.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>CAFFE FLAT WHITE</h5>#}
+{#                                                <p>Flat White brewed coffee Flat White</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="single-favorite-coffee">#}
+{#                                        <div class="media">#}
+{#                                            <div class="media-left">#}
+{#                                                <img src="static/img/favorite/3.png" alt="img">#}
+{#                                            </div>#}
+{#                                            <div class="media-body align-self-center">#}
+{#                                                <h5>LONG BLACK</h5>#}
+{#                                                <p>Fresh brewed coffee and steamed black</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="btn-wrap text-center mt-5">#}
+{#                    <a class="btn btn-red-shadow mt-3" href="{{ url_for('customer.shop_page') }}"><span>{{ _("View More") }} <img width="40px" src="static/img/icon-img/menu.png" alt="img"></span></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <!-- booking area end-->
+
+        <!-- customer area end-->
+        <div class="customer-area pd-top-150">
+            <div class="container">
+                <div class="customer-slider-inner">
+                    <img class="h1-favorite-coffee-img" src="static/img/bg/10.png" alt="img" width="1200px">
+                    <div class="customer-slider owl-carousel">
+                        <div class="item">
+                            <div class="single-customer">
+                                <div class="row">
+                                    <div class="col-md-8 align-self-center">
+                                        <div class="details mb-4 mb-md-0">
+                                            <span class="icon-box"></span>
+                                            <p>{{ _("Since the middle and the end of the 19th century, Europe has seen the rise of the retro style,
+                                             and the splendid ancient architectural clusters in European cities and the long-lasting vitality of Renaissance
+                                             literature, art, music and other classical culture and arts have made the ancient piano dress up again and take to the stage. ")}} </p>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="static/img/icon/4.png" alt="img">
+                                                </div>
+                                                <div class="media-body align-self-center">
+                                                    <h5>Jhon Smith Khan</h5>
+                                                    <p>Jhon Smith Khan</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="thumb">
+                                            <img src="static/img/customer/1.png" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="single-customer">
+                                <div class="row">
+                                    <div class="col-md-8 align-self-center">
+                                        <div class="details mb-4 mb-md-0">
+                                            <span class="icon-box"></span>
+                                            <p>{{ _("Since the middle and the end of the 19th century, Europe has seen the rise of the retro style,
+                                             and the splendid ancient architectural clusters in European cities and the long-lasting vitality of Renaissance
+                                             literature, art, music and other classical culture and arts have made the ancient piano dress up again and take to the stage. ")}} </p>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="static/img/icon/4.png" alt="img">
+                                                </div>
+                                                <div class="media-body align-self-center">
+                                                    <h5>Jhon Smith Khan</h5>
+                                                    <p>Jhon Smith Khan</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="thumb">
+                                            <img src="static/img/customer/2.png" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- customer area end-->
+
+        <!-- blog area end-->
+{#        <div class="blog-area pd-top-105 pd-bottom-120">#}
+{#            <img class="h1-blog-img" src="static/img/bg/11.png" alt="img">#}
+{#            <div class="container">#}
+{#                <div class="row justify-content-center">#}
+{#                    <div class="col-xl-7 col-lg-9">#}
+{#                        <div class="section-title text-center">#}
+{#                            <h2 class="title">From Blogs</h2>#}
+{#                            <p>Blogs ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt sit amet, efess consec ut labore et dolore</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row justify-content-center">#}
+{#                    <div class="col-lg-4 col-md-6">#}
+{#                        <div class="single-blog-inner">#}
+{#                            <div class="thumb">#}
+{#                                <img src="static/img/blog/1.png" alt="img">#}
+{#                            </div>#}
+{#                            <div class="details">#}
+{#                                <h5 class="name">DIY</h5>#}
+{#                                <h5 class="title"><a href="blog-single.html">Love Travelling Alone i don't need boy friend</a></h5>#}
+{#                                <p>November 29, 2018 | No Comments</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-4 col-md-6">#}
+{#                        <div class="single-blog-inner">#}
+{#                            <div class="thumb">#}
+{#                                <img src="static/img/blog/2.png" alt="img">#}
+{#                            </div>#}
+{#                            <div class="details">#}
+{#                                <h5 class="name">DIY</h5>#}
+{#                                <h5 class="title"><a href="blog-single.html">Love Travelling Alone i don't need boy friend</a></h5>#}
+{#                                <p>November 29, 2018 | No Comments</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-4 col-md-6">#}
+{#                        <div class="single-blog-inner">#}
+{#                            <div class="thumb">#}
+{#                                <img src="static/img/blog/3.png" alt="img">#}
+{#                            </div>#}
+{#                            <div class="details">#}
+{#                                <h5 class="name">DIY</h5>#}
+{#                                <h5 class="title"><a href="blog-single.html">Love Travelling Alone i don't need boy friend</a></h5>#}
+{#                                <p>November 29, 2018 | No Comments</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <!-- blog area end-->
+    </div>
+
+
+{% endblock %}

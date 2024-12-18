@@ -1,0 +1,594 @@
+{% extends "staff/stabase.html" %}
+{% block content %}
+        <main class="page-content page-content--full">
+            <div class="chat-grid">
+                <div class="chat-users">
+                    <div class="chat-users__top">
+                        <form class="chat-users__search" method="GET">
+                            <div class="input-group input-group--prepend">
+                                <div class="input-group__prepend">
+                                    <svg class="icon-icon-search">
+                                        <use xlink:href="#icon-search"></use>
+                                    </svg>
+                                </div>
+                                <input class="input" type="text" placeholder="Search...">
+                            </div>
+                        </form>
+                        <div class="chat-users__top-right">
+                            <button class="chat-users__button-add-users button-icon button-icon--small" data-toggle="users-add-list"><span class="button-icon__icon">
+                    <svg class="icon-icon-plus">
+                      <use xlink:href="#icon-plus"></use>
+                    </svg></span><span class="button-icon__icon">
+                    <svg class="icon-icon-chevron">
+                      <use xlink:href="#icon-chevron"></use>
+                    </svg></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-users__add-content scrollbar-thin scrollbar-hidden" data-simplebar>
+                        <ul class="chat-users__list">
+                            {% for room in rooms %}
+                                <li class="chat-users__list-header">{{ room.chatroom.upper()[0] }}</li>
+                                <li class="chat-users__list-item">
+                                    <a class="chat-users__item" href="{{ url_for('staff.chat', roomname=room) }}">
+                                        <div class="chat-users__item-avatar color-teal">
+{#                                            <div class="chat-users__item-avatar-text">BH</div>#}
+                                            {% if photo_path[room.chatroom] == 1 %}
+                                                <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room.chatroom) ) }}" alt="#" />
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                            {% endif %}
+                                        </div>
+                                        <div class="chat-users__item-right">
+                                            <h5 class="chat-users__item-name">{{ room.chatroom }}</h5>
+{#                                            <div class="text-sm text-grey">Hi there! I'm using chat</div>#}
+                                        </div>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="chat-users__content scrollbar-thin scrollbar-hidden" data-simplebar>
+                        <ul class="chat-users__list">
+                            {% for room in rooms %}
+                            <li class="chat-users__list-item">
+                                <a class="chat-users__item" href="{{ url_for('staff.chat', roomname=room) }}">
+                                    <div class="chat-users__item-avatar color-orange-dark">
+{#                                        <div class="chat-users__item-avatar-text">{{ room.chatroom }}</div><span class="badge-signal badge-signal--green"></span>#}
+                                        {% if photo_path[room.chatroom] == 1 %}
+                                            <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room.chatroom) ) }}" alt="#" />
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="chat-users__item-right">
+                                        <h5 class="chat-users__item-name">{{ room.chatroom }}</h5>
+{#                                        <div class="chat-users__item-right-group"><span class="chat-users__item-time">1 min</span>#}
+{#                                        </div>#}
+                                        <div class="chat-users__item-message">
+                                            {% if not_read[room.chatroom] != 0 %}
+                                            <div class="chat-users__item-badge"><span class="badge badge--small badge--red">{{ not_read[room.chatroom] }}</span>
+                                            </div>
+                                            {% endif %}
+{#                                            <p class="chat-users__item-text">The Arts play a large role in</p>#}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="chat-details">
+{#                    <h5 id="username">{{ username }}</h5>#}
+                    <div class="chat-details__backdrop"></div>
+                    <div class="chat-details__top">
+                        <div class="chat-details__top-left">
+                            <button class="chat-details__toggle toggle-sidebar toggle-sidebar--secondary" type="button">
+                                <svg class="icon-icon-chevron">
+                                    <use xlink:href="#icon-chevron"></use>
+                                </svg>
+                            </button>
+                            <a class="media-item media-item--medium" href="#">
+                                <div class="media-item__icon color-red">
+{#                                    <div class="media-item__icon-text">JB</div><span class="badge-signal badge-signal--green"></span>#}
+                                    {% if path == 1 %}
+                                        <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room) ) }}" alt="#" />
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                    {% endif %}
+                                </div>
+                                <div class="media-item__right">
+                                    <h5 class="media-item__title font-weight-medium">{{ room }}</h5>
+{#                                    <div class="text-sm text-grey">Active 1 min ago</div>#}
+                                </div>
+                            </a>
+                        </div>
+{#                        <div class="chat-details__top-right">#}
+{#                            <div class="items-more position-relative">#}
+{#                                <button class="items-more__button">#}
+{#                                    <svg class="icon-icon-more">#}
+{#                                        <use xlink:href="#icon-more"></use>#}
+{#                                    </svg>#}
+{#                                </button>#}
+{#                                <div class="dropdown-items dropdown-items--right">#}
+{#                                    <div class="dropdown-items__container">#}
+{#                                        <ul class="dropdown-items__list">#}
+{#                                            <li class="dropdown-items__item"><a class="dropdown-items__link">Create a room</a>#}
+{#                                            </li>#}
+{#                                            <li class="dropdown-items__item"><a class="dropdown-items__link">Profile</a>#}
+{#                                            </li>#}
+{#                                            <li class="dropdown-items__item"><a class="dropdown-items__link">Archived</a>#}
+{#                                            </li>#}
+{#                                            <li class="dropdown-items__item"><a class="dropdown-items__link">Settings</a>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                    </div>
+                    {% if chooseuser == 1 %}
+                    <div id="message-box" class="chat-details__content scrollbar-thin scrollbar-hidden" data-simplebar>
+                        {% for message in messages %}
+                            {% if message.message_type == 1 %}
+                                {% if message.chatroom == message.chat_user.username %}
+                                    <div class="chat-message">
+                                        <div class="chat-message__content">
+                                            <a class="chat-message__icon color-teal" href="#">
+                                                <div class="chat-message__icon-text">{{ message.chatroom }}</div>
+                                                {% if path == 1 %}
+                                                    <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room) ) }}" alt="#" />
+                                                {% else %}
+                                                    <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                                {% endif %}
+                                            </a>
+                                            <div class="chat-message__right">
+                                                <div class="chat-message__messages">
+                                                    <div class="chat-message__message-group">
+                                                        <div class="chat-message__message-item">
+                                                            <p class="chat-message__item-text">{{ message.chat_message }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="chat-message__tools_left">
+                                                            <div class="items-more">
+                                                                <button class="items-more__button">
+                                                                    <svg class="icon-icon-more">
+                                                                        <use xlink:href="#icon-action"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-message__bottom">
+                                            <div class="chat-message__time">{{ message.chat_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+                                            <div class="chat-message__files">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="chat-message chat-message--answer">
+                                        <div class="chat-message__content">
+                                            <a class="chat-message__icon color-red" href="#">
+                                                <div class="chat-message__icon-text">{{ message.chat_user.username}}</div>
+                                                <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                            </a>
+                                            <div class="chat-message__right">
+                                                <div class="chat-message__messages">
+                                                    <div class="chat-message__message-group">
+                                                        <div class="chat-message__message-item">
+                                                            <p class="chat-message__item-text">{{ message.chat_message }}
+                                                                <img src="{{ url_for('static', filename = 'img/staff/content/emoji-happy.svg') }}" alt="#" />
+                                                            </p>
+                                                        </div>
+                                                        <div class="chat-message__tools">
+                                                            <div class="items-more">
+                                                                <button class="items-more__button">
+                                                                    <svg class="icon-icon-more">
+                                                                        <use xlink:href="#icon-action"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-message__bottom">
+                                            <div class="chat-message__time">{{ message.chat_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if message.chatroom == message.chat_user.username %}
+                                    <div class="chat-message">
+                                        <div class="chat-message__content">
+                                            <a class="chat-message__icon color-teal" href="#">
+                                                <div class="chat-message__icon-text">{{ message.chatroom }}</div>
+                                                {% if path == 1 %}
+                                                    <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room) ) }}" alt="#" />
+                                                {% else %}
+                                                    <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                                {% endif %}
+                                            </a>
+                                            <div class="chat-message__right">
+                                                <div class="chat-message__messages">
+                                                    <div class="chat-message__message-group">
+                                                        <div class="chat-message__message-item">
+                                                            <p class="chat-message__item-text" style="font-size:20px"><strong>{{ pros[message.chat_message].product_name }}</strong> ${{ pros[message.chat_message].product_price }}
+                                                                </br>
+                                                                <a href="{{ url_for('customer.product_detail', pro_id = message.chat_message) }}">
+                                                                    {% if pros[message.chat_message].product_imgs.first() %}
+                                                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(pros[message.chat_message].product_imgs.first().img_path)) }}" width="200em" height="200em" alt="">
+                                                                    {% else %}
+                                                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" width="200em" height="200em" alt="">
+                                                                    {% endif %}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                        <div class="chat-message__tools_left">
+                                                            <div class="items-more">
+                                                                <button class="items-more__button">
+                                                                    <svg class="icon-icon-more">
+                                                                        <use xlink:href="#icon-action"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-message__bottom">
+                                            <div class="chat-message__time">{{ message.chat_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+                                            <div class="chat-message__files">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="chat-message chat-message--answer">
+                                        <div class="chat-message__content">
+                                            <a class="chat-message__icon color-red" href="#">
+                                                <div class="chat-message__icon-text">{{ message.chat_user.username}}</div>
+                                                <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                            </a>
+                                            <div class="chat-message__right">
+                                                <div class="chat-message__messages">
+                                                    <div class="chat-message__message-group">
+                                                        <div class="chat-message__message-item">
+                                                            <p class="chat-message__item-text" style="font-size:20px"><strong>{{ pros[message.chat_message].product_name }}</strong> ${{ pros[message.chat_message].product_price }}
+                                                                </br>
+                                                                <a href="{{ url_for('customer.product_detail', pro_id = message.chat_message) }}">
+                                                                    {% if pros[message.chat_message].product_imgs.first() %}
+                                                                        <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(pros[message.chat_message].product_imgs.first().img_path)) }}" width="200em" height="200em" alt="">
+                                                                    {% else %}
+                                                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" width="200em" height="200em" alt="">
+                                                                    {% endif %}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                        <div class="chat-message__tools">
+                                                            <div class="items-more">
+                                                                <button class="items-more__button">
+                                                                    <svg class="icon-icon-more">
+                                                                        <use xlink:href="#icon-action"></use>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-message__bottom">
+                                            <div class="chat-message__time">{{ message.chat_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="chat-details__bottom">
+                <div class="chat-details__input-group input-group input-group--white">
+{#                    <div class="chat-details__input-prepend">#}
+{#                        <label class="button-icon button-icon--transparent">#}
+{#                            <input type="file" multiple><span class="button-icon__icon">#}
+{#              <svg class="icon-icon-attachment">#}
+{#                <use xlink:href="#icon-attachment"></use>#}
+{#              </svg></span>#}
+{#                        </label>#}
+{#                        <div class="chat-details__emoji position-relative">#}
+{#                            <button class="button-icon button-icon--transparent" data-toggle="dropdown"><span class="button-icon__icon">#}
+{#                <svg class="icon-icon-emoji">#}
+{#                  <use xlink:href="#icon-emoji"></use>#}
+{#                </svg></span>#}
+{#                            </button>#}
+{#                            <div class="dropdown-emoji dropdown-menu dropdown-menu--up">#}
+{#                                <div class="dropdown-emoji__content">#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/laughing.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/happy-2.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/crazy.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/bad.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/angry.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/happy.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/thinking.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/sad.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/pressure.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/in-love.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/nerd.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/happy-3.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/shocked.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/wink.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/sweating.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/shocked-2.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/shocked-3.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                    <a class="dropdown-emoji__item" href="#" tabindex="0">#}
+{#                                        <img class="dropdown-emoji__image" src="../static/img/staff/content/emoji/sad-2.svg" alt="#" />#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <input id="send-msg-inp" class="chat-details__input input" type="text" placeholder="Write a Message...">
+                </div>
+                <div class="chat-details__bottom-right">
+                    <button id="send-msg-btn" class="button-add button-add--blue"><span class="button-add__icon">
+            <svg class="icon-icon-send">
+              <use xlink:href="#icon-send"></use>
+            </svg></span><span class="button-add__text"></span>
+                    </button>
+                </div>
+            </div>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+    {% if chooseuser == 1 %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/vendor/jquery.min.js') }}"></script>
+    <script  type="text/javascript" src="{{ url_for('static',filename='js/chat.js') }}"></script>
+    <script  type="text/javascript" src="{{ url_for('static',filename='js/socket.io.js') }}"></script>
+    <script>
+        window.onload = function(){
+        let room = '{{ room }}'
+        let username = '{{ username }}'
+        let inp = document.querySelector('#send-msg-inp')
+        let sendMsgBtn = document.querySelector('#send-msg-btn')
+        let messageBox = document.querySelector('#message-box .simplebar-content')
+        console.log(messageBox)
+        let leaveroom = document.querySelector('#leaveroom')
+        let socket = io();
+        // 连接
+        socket.connect(location.protocol + '//' + document.domain + ':' + location.port);
+        // 加入房间
+        socket.emit('join', {
+            username: username,
+            room: room,
+            message_product: "1",
+            product_name: "product_name",
+            product_price: "product_price",
+            product_id: "product_id",
+            product_img: "product_img"
+        })
+        // 退出房间
+        window.onbeforeunload = function(){
+        　　socket.emit('leave', {
+                username: username,
+                room: room
+            })
+        }
+        // 发送消息
+        sendMsgBtn.onclick = function () {
+            let messageBox = document.querySelector('#message-box .simplebar-content')
+            let inp = document.querySelector('#send-msg-inp')
+            let msg = inp.value
+            inp.value = ''
+            if(msg){
+                socket.emit('send msg', {
+                    user: username,
+                    room: room,
+                    message: msg,
+                })
+            }else {
+                alert('Please enter some words!')
+            }
+        }
+        // 回车发送消息
+        inp.addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                sendMsgBtn.click();
+            }
+        });
+        // 连接的信息
+        socket.on('connect info', function (data) {
+            console.log(data)
+            let messageBox = document.querySelector('#message-box .simplebar-content')
+            let connectInfo = document.createElement('div')
+            connectInfo.className = 'row'
+            let msg = `
+              <div class="col s4 offset-s4">
+                <div class="connect-info grey lighten-4 center">
+                  <span class="black-text">${data.connect}
+                  </span>
+                </div>
+              </div>`
+            connectInfo.innerHTML = msg
+            console.log(messageBox)
+            console.log(connectInfo)
+            messageBox.appendChild(connectInfo)
+
+            let msgprobox = document.createElement('div')
+            msgprobox.className = 'row'
+            let msg_pro = null
+            if (data.message_product === '0') {
+                if (data.username !== username) {
+                    msg_pro = `
+                        <div class="chat-message">
+                            <div class="chat-message__content">
+                                <a class="chat-message__icon color-teal" href="#">
+                                    <div class="chat-message__icon-text">${data.user}</div>
+                                    {% if path == 1 %}
+                                        <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room) ) }}" alt="#" />
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                    {% endif %}
+                                </a>
+                                <div class="chat-message__right">
+                                    <div class="chat-message__messages">
+                                        <div class="chat-message__message-group">
+                                            <div class="chat-message__message-item">
+                                                <p class="chat-message__item-text" style="font-size:20px"><strong>${data.product_name}</strong> $ ${data.product_price}</br>
+                                                    <a href="${data.product_id}">
+                                                        <img src="${data.product_img}" width="200em" height="200em" alt="">
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="chat-message__tools_left">
+                                                <div class="items-more">
+                                                    <button class="items-more__button">
+                                                        <svg class="icon-icon-more">
+                                                            <use xlink:href="#icon-action"></use>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-message__bottom">
+                                <div class="chat-message__time">moment ago</div>
+                                <div class="chat-message__files">
+                                </div>
+                            </div>
+                        </div>`
+                }
+                msgprobox.innerHTML = msg_pro
+                messageBox.appendChild(msgprobox)
+            }
+            $('#message-box .simplebar-content-wrapper').scrollTop($('#message-box .simplebar-content').outerHeight())
+        })
+        // 接受消息
+        socket.on('send msg', function (data) {
+            console.log(data)
+            console.log(socket.id)
+            let messageBox = document.querySelector('#message-box .simplebar-content')
+            let msg = null
+            let msgbox = document.createElement('div')
+            if (data.user === username) {
+                msg = `
+                    <div class="chat-message chat-message--answer">
+                        <div class="chat-message__content">
+                            <a class="chat-message__icon color-red" href="#">
+                                <div class="chat-message__icon-text">${data.user}</div>
+                                <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                            </a>
+                            <div class="chat-message__right">
+                                <div class="chat-message__messages">
+                                    <div class="chat-message__message-group">
+                                        <div class="chat-message__message-item">
+                                            <p class="chat-message__item-text">${data.message}
+                                                <img src="{{ url_for('static', filename = 'img/staff/content/emoji-happy.svg') }}" alt="#" />
+                                            </p>
+                                        </div>
+                                        <div class="chat-message__tools">
+                                            <div class="items-more">
+                                                <button class="items-more__button">
+                                                    <svg class="icon-icon-more">
+                                                        <use xlink:href="#icon-action"></use>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-message__bottom">
+                            <div class="chat-message__time">moment ago</div>
+                        </div>
+                    </div>`
+            } else {
+                msg = `
+                    <div class="chat-message">
+                        <div class="chat-message__content">
+                            <a class="chat-message__icon color-teal" href="#">
+                                <div class="chat-message__icon-text">${data.user}</div>
+                                {% if path == 1 %}
+                                    <img src="{{ url_for('static', filename = 'img/profile/{}_profile.png'.format(room) ) }}" alt="#" />
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='img/profile/not_assigned.jpeg') }}" alt="#" />
+                                {% endif %}
+                            </a>
+                            <div class="chat-message__right">
+                                <div class="chat-message__messages">
+                                    <div class="chat-message__message-group">
+                                        <div class="chat-message__message-item">
+                                            <p class="chat-message__item-text">${data.message}
+                                            </p>
+                                        </div>
+                                        <div class="chat-message__tools_left">
+                                            <div class="items-more">
+                                                <button class="items-more__button">
+                                                    <svg class="icon-icon-more">
+                                                        <use xlink:href="#icon-action"></use>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-message__bottom">
+                            <div class="chat-message__time">moment ago</div>
+                            <div class="chat-message__files">
+                            </div>
+                        </div>
+                    </div>`
+            }
+            msgbox.innerHTML = msg
+            messageBox.appendChild(msgbox)
+            $('#message-box .simplebar-content-wrapper').scrollTop($('#message-box .simplebar-content').outerHeight())
+        })
+        }
+    </script>
+    {% endif %}
+{% endblock %}

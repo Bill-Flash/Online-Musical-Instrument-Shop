@@ -1,0 +1,180 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/infoorder.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/modorder.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Edit Order</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+                        <div class="add-product__form">
+                            <form class="add-product__form" action="/staff/modorder/{{ order.order_id }}"
+                                  enctype="multipart/form-data" method="post">
+                                {{ form.hidden_tag() }}
+                                <div class="add-product__row" style="display: flex">
+                                    <div class="add-product__right">
+                                        <div class="row row--md">
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">ID</label>
+                                                <div class="input" id="id">{{ order.order_id }}</div>
+
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Create Time</label>
+                                                <div class="input-group">
+                                                    <div class="input" id="time">{{ order.create_time }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Customer Name</label>
+                                                <div class="input-group">
+                                                    <div class="input">{{ buyer.username }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Receiving Name</label>
+                                                <div class="input-group">
+                                                    {{ form.rec_name(class="input", required="") }}
+                                                    {#                                                <div class="input">{{ order.order_consignee }}</div>#}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Phone Number</label>
+                                                <div class="input-group">
+                                                    {{ form.phone_number(class="input", required="") }}
+                                                    {#                                                <div class="input">{{ order.order_phone }}</div>#}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Address</label>
+                                                {{ form.address(class="input", required="") }}
+                                                {#                                            <div class="input">{{ order.order_address }}</div>#}
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group form-group--lg">
+                                                <label class="form-label">Priority</label>
+                                                <div class="input-group input-group--prepend">
+                                                    <div class="input-group input-group--append">
+                                                        {{ form.priority(class="input js-input-select input--fluid") }}
+                                                        <span class="input-group__arrow">
+                              <svg class="icon-icon-keyboard-down">
+                                <use xlink:href="#icon-keyboard-down"></use>
+                              </svg></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group form-group--lg">
+                                                <label class="form-label">Status</label>
+                                                <div class="input-group input-group--prepend">
+                                                    <div class="input-group input-group--append">
+                                                        {{ form.state(class="input js-input-select input--fluid") }}
+                                                        <span class="input-group__arrow">
+                              <svg class="icon-icon-keyboard-down">
+                                <use xlink:href="#icon-keyboard-down"></use>
+                              </svg></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="reason" class="col-12 form-group form-group--lg reason">
+                                                <label class="form-label">Reason</label>
+                                                {{ form.reason(class="input") }}
+                                            </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                                <label class="form-label">Total Cost</label>
+                                                <div class="input-group input-group--prepend">
+                                                    <div class="input-group__prepend"><span
+                                                            class="input-group__symbol">${{ order.total_cost }}</span>
+                                                    </div>
+                                                    <div class="input"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrapper">
+                                            <div class="table-wrapper__content table-collapse scrollbar-thin scrollbar-visible"
+                                                 data-simplebar>
+                                                <table class="table table--lines">
+                                                    {#                        <colgroup>#}
+                                                    {#                            <col width="90px">#}
+                                                    {#                            <col width="100px">#}
+                                                    {#                            <col width="350px">#}
+                                                    {#                            <col>#}
+                                                    {#                            <col>#}
+                                                    {#                            <col>#}
+                                                    {#                            <col>#}
+                                                    {#                            <col>#}
+                                                    {#                        </colgroup>#}
+                                                    <thead class="table__header">
+                                                    <tr class="table__header-row">
+                                                        {#                            <th>#}
+                                                        {#                                <div class="table__checkbox table__checkbox--all">#}
+                                                        {#                                    <label class="checkbox">#}
+                                                        {#                                        <input class="js-checkbox-all" type="checkbox" data-checkbox-all="product"><span#}
+                                                        {#                                            class="checkbox__marker"><span class="checkbox__marker-icon">#}
+                                                        {#                              <svg class="icon-icon-checked">#}
+                                                        {#                                <use xlink:href="#icon-checked"></use>#}
+                                                        {#                              </svg></span></span>#}
+                                                        {#                                    </label>#}
+                                                        {#                                </div>#}
+                                                        {#                            </th>#}
+                                                        <th class="d-none d-lg-table-cell">
+                                                            <span>Musical Instrument ID</span>
+                                                        </th>
+                                                        <th class="table__th-sort">
+                                                            <span class="align-middle">Musical Instrument Name</span>
+                                                            <span class="sort sort--down"></span>
+                                                        </th>
+                                                        <th class="table__th-sort d-sm-table-cell">
+                                                            <span class="align-middle">Number</span>
+                                                            <span class="sort sort--down"></span>
+                                                        </th>
+                                                        {#                            <th class="table__th-sort">#}
+                                                        {#                                <span class="align-middle">Total Cost</span>#}
+                                                        {#                                <span class="sort sort--down"></span>#}
+                                                        {#                            </th>#}
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="order-body">
+                                                    {% for p in products %}
+                                                        <tr class="table__row">
+                                                            <td class="table__td">
+                                                                {{ p.product.product_id }}
+
+                                                            </td>
+                                                            <td class="table__td">
+                                                                {{ p.product.product_name }}
+                                                            </td>
+                                                            <td class="table__td">
+                                                                {{ p.number }}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div class="">
+                                            <button class="button button--primary button--block" id="edit" onclick="alert('successfully modified')">Confirm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+
+{% endblock %}
+{% block content %}
+{{ super() }}
+         <!-- shopping-cart-area start -->
+        <div class="cart-main-area pt-95 pb-100">
+            <div class="container">
+                <h3 class="page-title">{{ _("Details") }} </h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive">
+
+
+                                <table>
+                                <div class="row">
+                                <thead class="col-lg-12">
+                                    <h4>{{ _("Products in this Order") }}</h4>
+                                </thead>
+                                </div>
+                                    <thead>
+                                        <tr>
+{#                                            <th>#}
+{#                                                Select#}
+{#                                            </th>#}
+                                            <th>{{ _("Image") }}</th>
+                                            <th>{{ _("Product Name") }}</th>
+                                            <th>{{ _("Unit Price") }}</th>
+                                            <th>{{ _("Qty") }}</th>
+                                            <th>{{ _("Subtotal") }}</th>
+{#                                            <th>Delete</th>#}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                                        {% for shopping in order.products.all() %}
+                                            <tr class="selected-items">
+{#                                                <td>#}
+{#                                                    <input type="checkbox" class="checkbox-cart">#}
+{#                                                </td>#}
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.product.product_imgs.first().img_path)) }}" alt="">
+                                                </td>
+                                                <td class="product-name"><p style="margin-left: 5em">{{ shopping.product.name_chinese }}</p></td>
+                                                <td class="product-price-cart"><span class="amount">${{ shopping.product.product_price }}</span></td>
+                                                <td class="product-quantity">
+                                                    <p class="font-weight-bold" style="display: flex; justify-content: center">{{ shopping.number }}</p>
+                                                </td>
+                                                <td class="product-subtotal">${{ shopping.product.product_price * shopping.number }}</td>
+{#                                                <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>#}
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for shopping in order.products.all() %}
+                                            <tr class="selected-items">
+{#                                                <td>#}
+{#                                                    <input type="checkbox" class="checkbox-cart">#}
+{#                                                </td>#}
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.product.product_imgs.first().img_path)) }}" alt="">
+                                                </td>
+                                                <td class="product-name"><p style="margin-left: 5em">{{ shopping.product.product_name }}</p></td>
+                                                <td class="product-price-cart"><span class="amount">${{ shopping.product.product_price }}</span></td>
+                                                <td class="product-quantity">
+                                                    <p class="font-weight-bold" style="display: flex; justify-content: center">{{ shopping.number }}</p>
+                                                </td>
+                                                <td class="product-subtotal">${{ shopping.product.product_price * shopping.number }}</td>
+{#                                                <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>#}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cart-shiping-update-wrapper">
+                                        <div class="cart-shiping-update">
+                                            <a href="/userinfo">{{ _("Back to Profile") }}</a>
+                                        </div>
+{#                                        <div class="cart-clear">#}
+{#                                            <button id="cart_clear" type="button" class="btn btn-outline-dark" >CLEAR SHOPPING CART</button>#}
+{#                                        </div>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    <div id="conclude" class="card">
+                            <div id="cart-toolbar">
+    {#                            <div id="left-tools">#}
+    {#                                <div style="display: flex; width: 6em;">#}
+    {#                                    <input type="checkbox" style="height: 100%; margin-right: 0.5em" id="select-all">#}
+    {#                                    <label class="form-check-label" style="margin: auto" for="select-all">#}
+    {#                                        SelectAll#}
+    {#                                    </label>#}
+    {#                                </div>#}
+    {#                                <div>#}
+    {#                                    <button id="delete-select" class="btn btn-outline-primary">Delete Selected</button>#}
+    {#                                </div>#}
+    {#                            </div>#}
+                                <div id="right-tools" st>
+                                    <div style="height: 100%; display: flex; justify-content: space-around">
+                                        <p class="font-weight-light" style="margin: auto">{{ _("Total cost") }}: </p>
+                                        <p id="total-cost" class="" style="margin: auto; padding-left: 1em; padding-right: 2em">{{ order.total_cost }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% if order.delivery==0 %}
+                        <div class="row">
+{#                                <div class="col-lg-4 col-md-6">#}
+{#                                    <div class="cart-tax">#}
+{#                                        <h4 class="cart-bottom-title">Services</h4>#}
+{#                                        <div class="tax-wrapper">#}
+{#                                            <div class="tax-select-wrapper">#}
+{#                                                <div class="tax-select">#}
+{#                                                    <label>#}
+{#                                                        Choose the service that fits you:(Delivery/Pickup)#}
+{#                                                    </label>#}
+{#                                                    <br>#}
+{#                                                    <br>#}
+{#                                                    <select class="email s-email s-wid" required id="service">#}
+{#                                                        <option selected>Delivery</option>#}
+{#                                                        <option>Pickup</option>#}
+{#                                                    </select>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <!-- used for address and the name -->
+{#                                <div class="col-lg-4 col-md-12">#}
+                                    <div class="discount-code-wrapper" style="display:table-cell;">
+                                        <h4 class="cart-bottom-title">{{ _("Recipient INFORMATION") }}</h4>
+                                        <div class="Address">
+                                            <div style="float: left;">
+                                            <label>{{ _("Recipient Name") }}: <strong id="name">{{ userInfo.username }}</strong></label>
+                                            <br>
+                                            <label>{{ _("City") }}: <strong id="city">{{ userInfo.city }}</strong></label>
+                                            <br>
+                                            <label>{{ _("Country") }}: <strong id="country">{{ userInfo.country }}</strong></label>
+                                            </div>
+                                            <div style="float: right; margin-left: 25px;">
+                                            <label>{{ _("Zip") }}: <strong>{{ userInfo.zip }}</strong></label>
+                                            <br>
+                                            <label>{{ _("Phone") }}: <strong id="phone">{% if userInfo.phone %}  {{ userInfo.phone }} {% else %} None {% endif %}</strong></label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                    {% else %}
+                        <div class="row">
+                            {% if isDelivery == True %}
+                                <div class="discount-code-wrapper" style="display:table-cell;">
+                                            <h4 class="cart-bottom-title">{{ _("You can pick up your items in the shop") }}</h4>
+                                            <p>{{ _("Pick up code") }}: {{ order.delivery }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="discount-code-wrapper" style="display:table-cell;">
+                            <h4 class="cart-bottom-title">{{ _("The Order ID (You could ask staff for using this)") }}</h4>
+                            <p>{{ _("Order ID: ") }} {{ order.order_id }}</p>
+                        </div>
+                    </div>
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+{% endblock %}

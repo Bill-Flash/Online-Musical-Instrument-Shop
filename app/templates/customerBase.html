@@ -1,0 +1,66 @@
+{% extends "customerNav.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple-line-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple-line-meanmenu.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive1.css') }}">
+    <script src="{{ url_for('static', filename='js/checkmail.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    
+{% endblock %}
+{% block content %}
+
+    <div class="breadcrumb-area pt-95 pb-95 bg-img" style="background-image:url({{ url_for('static',filename='img/banner/bg.png') }});">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+{#                <h2>Shop Page</h2>#}
+{#                <ul>#}
+{#                    <li><a href="index.html">home</a></li>#}
+{#                    <li class="active">Shop Page</li>#}
+{#                </ul>#}
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 1031; right: 0; width:50%;bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+            <div class="toast-header">
+                <img src="..." class="rounded mr-2" alt="...">
+                <strong class="mr-auto">{{ _("Notification") }}</strong>
+                <small></small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" >
+              Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ _("Confirmation") }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="confirmation-body" class="modal-body font-weight-bolder">
+
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ '/userinfo' }}" type="button" class="btn btn-primary" id="confirm_exit" data-dismiss="modal">{{ _("Confirm") }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

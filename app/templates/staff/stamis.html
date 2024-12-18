@@ -1,0 +1,168 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/mis.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/mis.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Musical Instruments</h1>
+            </div>
+            <div class="toolbox">
+                <div class="toolbox__row row gutter-bottom-xs">
+                    <div class="toolbox__left col-12 col-lg">
+                        <div class="toolbox__left-row row row--xs gutter-bottom-xs">
+                            <div class="form-group form-group--inline col-12 col-sm-auto">
+                                <label class="form-label">Show</label>
+
+                                {# showing number #}
+
+                                <div class="input-group input-group--white input-group--append">
+                                    <select id="num" class="input js-input-select">
+                                        <option value="5" selected="selected">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    {#                                    <input class="input input--select" type="text" value="10" size="1"#}
+                                    {#                                           data-toggle="dropdown" readonly>#}
+                                    <span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            {# types #}
+                            <div class="form-group form-group--inline col col-sm-auto">
+                                <div class="input-group input-group--white input-group--append">
+                                    <select id="type" class="input js-input-select" data-placeholder="">
+                                        <option value="all" selected="selected">All Categories</option>
+                                    </select><span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toolbox__right col-12 col-lg-auto">
+                        <div class="toolbox__right-row row row--xs flex-nowrap">
+                            <div class="col col-lg-auto">
+                                <form class="toolbox__search" method="GET">
+                                    <div class="input-group input-group--white input-group--prepend">
+                                        <div class="input-group__prepend">
+                                            <svg class="icon-icon-search">
+                                                <use xlink:href="#icon-search"></use>
+                                            </svg>
+                                        </div>
+                                        <input id="search-input" class="input" type="text" placeholder="Search product">
+                                    </div>
+                                </form>
+                            </div>
+                            <button id="search-button">Search</button>
+                            <div class="col-auto">
+                                {#                                <button class="button-add button-add--blue" data-modal="#addProduct">#}
+                                {#                                    <span class="button-add__icon">#}
+                                {#                        <svg class="icon-icon-plus">#}
+                                {#                          <use xlink:href="#icon-plus"></use>#}
+                                {#                        </svg></span><span class="button-add__text"></span>#}
+                                {#                                </button>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <div class="table-wrapper__content table-collapse scrollbar-thin scrollbar-visible" data-simplebar>
+                    <table class="table table--lines">
+                        {#                        <colgroup>#}
+                        {#                            <col width="90px">#}
+                        {#                            <col width="100px">#}
+                        {#                            <col width="350px">#}
+                        {#                            <col>#}
+                        {#                            <col>#}
+                        {#                            <col>#}
+                        {#                            <col>#}
+                        {#                            <col>#}
+                        {#                        </colgroup>#}
+                        <thead class="table__header">
+                        <tr class="table__header-row">
+                            <th class="d-none d-lg-table-cell">
+                                <span>ID</span>
+                            </th>
+                            <th class="table__th-sort">
+                                <span class="align-middle" id="name">Musical Instrument Name</span>
+                                <span id="name-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="category">
+                                <span class="align-middle">Category</span>
+                                <span id="category-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="price">
+                                <span class="align-middle">Price</span>
+                                <span id="price-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="inventory">
+                                <span class="align-middle">Inventory</span>
+                                <span id="inventory-sort" class="sort"></span>
+                            </th>
+                            <th class="table__th-sort" id="status">
+                                <span class="align-middle">Status</span>
+                                <span id="status-sort" class="sort"></span>
+                            </th>
+                            <th class="table__actions"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="mis-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper__footer">
+                    <div class="row">
+                        <div class="table-wrapper__show-result col text-grey">
+                            {#                            <span class="d-none d-sm-inline-block">Showing</span>#}
+                            {#                            1 to 10 <span class="d-none d-sm-inline-block">of 50 items</span>#}
+                        </div>
+                        <div class="table-wrapper__pagination col-auto">
+                            <ol class="pagination">
+                                <li class="pagination__item">
+                                    <button id="before" class="pagination__arrow pagination__arrow--prev">
+                                        <svg class="icon-icon-keyboard-left">
+                                            <use xlink:href="#icon-keyboard-left"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                {#                                <li class="pagination__item active"><a class="pagination__link" href="#">1</a>#}
+                                {#                                </li>#}
+                                <li class="pagination__item">
+                                    <div id="now-page">Now Page: 1</div>
+                                </li>
+                                <li class="pagination__item">
+                                    <input type="text" id="page" value="1" class="input">
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="redirect" class="button ">Redirect</button>
+                                </li>
+                                {#                                <li class="pagination__item pagination__item--dots">...</li>#}
+                                {#                                <li class="pagination__item"><a class="pagination__link" href="#">10</a>#}
+                                </li>
+                                <li class="pagination__item">
+                                    <button id="after" class="pagination__arrow pagination__arrow--next">
+                                        <svg class="icon-icon-keyboard-right">
+                                            <use xlink:href="#icon-keyboard-right"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

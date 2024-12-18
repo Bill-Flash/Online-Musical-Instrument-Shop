@@ -1,0 +1,222 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/infoorder.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/orderState.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/infoorder.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Order Details</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+                        <div class="add-product__form">
+                            <div class="add-product__row" style="display: flex">
+                                <div class="add-product__right">
+                                    <div class="row row--md">
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">ID</label>
+                                            <div class="input" id="id">{{ order.order_id }}</div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Create Time</label>
+                                            <div class="input-group">
+                                                <div class="input" id="time">{{ order.create_time }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Customer Name</label>
+                                            <div class="input-group">
+                                                <div class="input">{{ buyer.username }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Receiving Name</label>
+                                            <div class="input-group">
+                                                <div class="input">{{ order.order_consignee }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Phone Number</label>
+                                            <div class="input-group">
+                                                <div class="input">{{ order.order_phone }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Address</label>
+                                            <div class="input">{{ order.order_address }}</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group form-group--lg">
+                                            <label class="form-label">Total Cost</label>
+                                            <div class="input-group input-group--prepend">
+                                                <div class="input-group__prepend"><span
+                                                        class="input-group__symbol">${{ order.total_cost }}</span>
+                                                </div>
+                                                <div class="input"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group form-group--lg">
+                                            <label class="form-label">Status</label>
+                                            <div class="input-group" style="flex-flow: row; display: none">
+                                                <div class="input" id="status"
+                                                     style="display: none">{{ order.order_state }}</div>
+{#                                                <div id="paid" class="status-bar">Paid</div>#}
+{#                                                <div id="delivery" class="status-bar">Delivery</div>#}
+{#                                                <div id="finished" class="status-bar">Finished</div>#}
+{#                                                <div id="exception" class="status-bar">Exception</div>#}
+{#                                                <div id="canceled" class="status-bar">Canceled</div>#}
+                                            </div>
+                                            <div>
+                                                <div class="state-rcol">
+                                                    <div id="process-04" class="order-process">
+                                                        <div id="paid" class="node ready">
+                                                            <div>
+                                                                <i class="node-icon icon-start"></i><br>
+                                                                <label class="txt2" id="icon1-text">Paid</label>
+                                                            </div>
+                                                        </div>
+                                                        <div id="p1" class="proce wait">
+                                                            <ul>
+                                                                <li class="txt1"></li>
+                                                            </ul>
+                                                        </div>
+{#                                                        <div class="node ready"><i class="node-icon icon-pay"></i>#}
+{#                                                            <ul>#}
+{#                                                                <li class="txt1">&nbsp;</li>#}
+{#                                                                <li class="txt2">付款成功</li>#}
+{#                                                                <li id="track_time_4" class="txt3"></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                        <div class="proce done">#}
+{#                                                            <ul>#}
+{#                                                                <li class="txt1">&nbsp;</li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                        <div class="node ready"><i class="node-icon icon-store"></i>#}
+{#                                                            <ul>#}
+{#                                                                <li class="txt1">&nbsp;</li>#}
+{#                                                                <li class="txt2">商品出库</li>#}
+{#                                                                <li id="track_time_1" class="txt3">2022-03-21 <br>#}
+{#                                                                    17:08:19#}
+{#                                                                </li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                        <div class="proce done">#}
+{#                                                            <ul>#}
+{#                                                                <li class="txt1">&nbsp;</li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+                                                        <div id="delivery" class="node done">
+                                                            <div>
+                                                                <i class="node-icon icon-express" id="icon2"></i><br>
+                                                                <label class="txt2" id="icon2-text">Delivery</label>
+                                                            </div>
+                                                        </div>
+                                                        <div id="p2" class="proce wait">
+                                                            <ul>
+                                                                <li class="txt1">&nbsp;</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div id="finished" class="node done">
+                                                            <div>
+                                                                <i class="node-icon icon-finish"></i><br>
+                                                                <label class="status-text">Finished</label>
+                                                            </div>
+                                                        </div>
+                                                        <div id="exception" >
+                                                            <div>
+                                                                <i class="node-icon icon-finish"></i><br>
+                                                                <label class="status-text">Exception</label>
+                                                            </div>
+                                                        </div>
+                                                        <div id="canceled" >
+                                                            <div>
+                                                                <i class="node-icon icon-cancel"></i><br>
+                                                                <label class="status-text">Canceled</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="reason" class="col-12 form-group form-group--lg reason">
+                                            <label class="form-label">Reason</label>
+                                            <textarea class="input"
+                                                      readonly="readonly">{{ order.state_reason }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="table-wrapper">
+                                        <div class="table-wrapper__content table-collapse scrollbar-thin scrollbar-visible"
+                                             data-simplebar>
+                                            <table class="table table--lines">
+                                                {#                        <colgroup>#}
+                                                {#                            <col width="90px">#}
+                                                {#                            <col width="100px">#}
+                                                {#                            <col width="350px">#}
+                                                {#                            <col>#}
+                                                {#                            <col>#}
+                                                {#                            <col>#}
+                                                {#                            <col>#}
+                                                {#                            <col>#}
+                                                {#                        </colgroup>#}
+                                                <thead class="table__header">
+                                                <tr class="table__header-row">
+
+                                                    <th class="d-none d-lg-table-cell">
+                                                        <span>Musical Instrument ID</span>
+                                                    </th>
+                                                    <th class="table__th-sort">
+                                                        <span class="align-middle">Musical Instrument Name</span>
+                                                        <span class="sort sort--down"></span>
+                                                    </th>
+                                                    <th class="table__th-sort d-sm-table-cell">
+                                                        <span class="align-middle">Number</span>
+                                                        <span class="sort sort--down"></span>
+                                                    </th>
+                                                    {#                            <th class="table__th-sort">#}
+                                                    {#                                <span class="align-middle">Total Cost</span>#}
+                                                    {#                                <span class="sort sort--down"></span>#}
+                                                    {#                            </th>#}
+                                                </tr>
+                                                </thead>
+                                                <tbody id="order-body">
+                                                {% for p in products %}
+                                                    <tr class="table__row">
+                                                        <td class="table__td">
+                                                            {{ p.middleProduct_id }}
+                                                        </td>
+                                                        <td class="table__td">
+                                                            {{ p.product.product_name }}
+                                                        </td>
+                                                        <td class="table__td">
+                                                            {{ p.number }}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                    <div class="">
+                                        <button class="button button--primary button--block" id="edit">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock %}

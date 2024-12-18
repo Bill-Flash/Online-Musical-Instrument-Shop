@@ -1,0 +1,184 @@
+{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/product/product_order.js') }}"></script>
+{% endblock %}
+{% block content %}
+{{ super() }}
+         <!-- shopping-cart-area start -->
+        <div class="cart-main-area pt-95 pb-100">
+            <div class="container">
+                <h3 class="page-title">{{ _("Order and Finish Page") }}</h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive">
+
+
+                                <table>
+                                <div class="row">
+                                <thead class="col-lg-12">
+                                    <h4>{{ _("Product List") }}</h4>
+                                </thead>
+                                </div>
+                                    <thead>
+                                        <tr>
+                                            <th>{{ _("Image") }}</th>
+                                            <th>{{ _("Product Name") }}</th>
+                                            <th>{{ _("Unit Price") }}</th>
+                                            <th>{{ _("Qty") }}</th>
+                                            <th>{{ _("Subtotal") }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                                        {% for shopping in shoppings %}
+                                            <tr class="selected-items">
+{#                                                <td>#}
+{#                                                    <input type="checkbox" class="checkbox-cart">#}
+{#                                                </td>#}
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.shopping_product.product_imgs.first().img_path)) }}" alt="">
+                                                </td>
+                                                <td class="product-name"><p style="margin-left: 5em">{{ shopping.shopping_product.name_chinese }}</p></td>
+                                                <td class="product-price-cart"><span class="amount">${{ shopping.shopping_product.product_price }}</span></td>
+                                                <td class="product-quantity">
+                                                    <p class="font-weight-bold" style="display: flex; justify-content: center">{{ shopping.number }}</p>
+                                                </td>
+                                                <td class="product-subtotal">${{ shopping.shopping_product.product_price * shopping.number }}</td>
+{#                                                <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>#}
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for shopping in shoppings %}
+                                            <tr class="selected-items">
+{#                                                <td>#}
+{#                                                    <input type="checkbox" class="checkbox-cart">#}
+{#                                                </td>#}
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.shopping_product.product_imgs.first().img_path)) }}" alt="">
+                                                </td>
+                                                <td class="product-name"><p style="margin-left: 5em">{{ shopping.shopping_product.product_name }}</p></td>
+                                                <td class="product-price-cart"><span class="amount">${{ shopping.shopping_product.product_price }}</span></td>
+                                                <td class="product-quantity">
+                                                    <p class="font-weight-bold" style="display: flex; justify-content: center">{{ shopping.number }}</p>
+                                                </td>
+                                                <td class="product-subtotal">${{ shopping.shopping_product.product_price * shopping.number }}</td>
+{#                                                <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>#}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cart-shiping-update-wrapper">
+{#                                        <div class="cart-shiping-update">#}
+{#                                            <a href="/shop_page">Continue Shopping</a>#}
+{#                                            <button>Update Shopping Cart</button>#}
+{#                                        </div>#}
+{#                                        <div class="cart-clear">#}
+{#                                            <button id="cart_clear" type="button" class="btn btn-outline-dark" >CLEAR SHOPPING CART</button>#}
+{#                                        </div>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    <div id="conclude" class="card">
+                            <div id="cart-toolbar">
+    {#                            <div id="left-tools">#}
+    {#                                <div style="display: flex; width: 6em;">#}
+    {#                                    <input type="checkbox" style="height: 100%; margin-right: 0.5em" id="select-all">#}
+    {#                                    <label class="form-check-label" style="margin: auto" for="select-all">#}
+    {#                                        SelectAll#}
+    {#                                    </label>#}
+    {#                                </div>#}
+    {#                                <div>#}
+    {#                                    <button id="delete-select" class="btn btn-outline-primary">Delete Selected</button>#}
+    {#                                </div>#}
+    {#                            </div>#}
+                                <div id="right-tools" st>
+                                    <div style="height: 100%; display: flex; justify-content: space-around">
+                                        <p class="font-weight-light" style="margin: auto">{{ _("Total cost") }}: </p>
+                                        <p id="total-cost" class="" style="margin: auto; padding-left: 1em; padding-right: 2em">{{ cost }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: right; padding-right: 6em; padding-top: 3em">
+                                <button id="buy" style="border: 2px solid red; border-radius: 5px; height: 3em; width: 10em" class="btn btn-outline-danger">
+                                    {{ _("Purchase") }}</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="cart-tax">
+                                        <h4 class="cart-bottom-title">{{ _("Services") }}</h4>
+                                        <div class="tax-wrapper">
+                                            <div class="tax-select-wrapper">
+                                                <div class="tax-select">
+                                                    <label>
+                                                        {{ _("Choose the service that fits you:(Delivery/Pickup)") }}
+                                                    </label>
+                                                    <br>
+                                                    <br>
+                                                    <select class="email s-email s-wid" required id="service">
+                                                        <option selected>{{ _("Delivery") }}</option>
+                                                        {% if state == 'Closed' %}
+                                                            <optgroup label="{{ _("Pickup") }}"></optgroup>
+                                                    </select>
+                                                            <br>
+                                                            <em style="color: red">{{ _("It's sorry to remind you that our physical store is
+                                                                closed due to the pandemic.")}}</em>
+                                                        {% else %}
+                                                            <option>{{ _("Pickup") }}</option>
+                                                    </select>
+                                                        {% endif %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- used for address and the name -->
+                                <div class="col-lg-4 col-md-12">
+                                    <div class="discount-code-wrapper">
+                                        <h4 class="cart-bottom-title">{{ _("USER INFORMATION") }}</h4>
+                                        <div class="discount-code">
+                                            <p>{{ _("Recipient Name") }}</p>
+                                            <input type="text" placeholder="{{ userInfo.username }}" name="name" value="{{ userInfo.username }}" οnfοcus="if(value=='{{ userInfo.username }}'){value=''}" οnblur="if(value==''){value='{{ userInfo.username }}'}">
+                                        </div>
+                                        <div class="Address">
+                                            <hr>
+                                            <label>{{ _("City") }}: <strong id="city">{{ userInfo.city }}</strong></label>
+                                            <br>
+                                            <label>{{ _("Country") }}: <strong id="country">{{ userInfo.country }}</strong></label>
+                                            <br>
+                                            <label>{{ _("Zip") }}: <strong>{{ userInfo.zip }}</strong></label>
+                                            <br>
+                                            <label>{{ _("Phone") }}: <strong id="phone">{% if userInfo.phone %}  {{ userInfo.phone }} {% else %}
+                                                {{ _("To") }}
+                                                <a href="{{ url_for('customer.userInfo') }}">{{ _("Fill") }}</a>?{% endif %}</strong></label>
+                                        </div>
+
+                                    </div>
+                                </div>
+{#                                <div class="col-lg-4 col-md-12">#}
+{#                                    <div class="grand-totall">#}
+{#                                        <span>Subtotal:   $155.00</span>#}
+{#                                        <h5>Grand Total:   $353.00</h5>#}
+{#                                        <a href="#">Proceed To Checkout</a>#}
+{#                                        <p>Checkout with Multiple Addresses</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+{% endblock %}

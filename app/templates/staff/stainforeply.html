@@ -1,0 +1,45 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/addreply.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/inforeply.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Reply Details</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+                            <div class="add-product__row" style="display: flex">
+                                <div class="add-product__right">
+                                    <div class="row row--md">
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Question</label>
+                                            <div style="display: none" id="id">{{ reply.answer_id }}</div>
+                                            <div class="input-group">
+                                                <div class="input">{{ reply.question }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Answer</label>
+                                            <div class="input">{{ reply.answer }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <button class="button button--primary button--block" id="edit">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock %}
+

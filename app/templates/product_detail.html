@@ -1,0 +1,304 @@
+﻿{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+    <!-- all plugins here -->
+{#    <script src="static/js/vendor.js"></script>#}
+{#    <!-- main js  -->#}
+{#    <script src="static/js/main.js"></script>#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">#}
+{#    <script src="static/js/modernizr-2.8.3.min.js"></script>#}
+{#    <script src="static/js/jquery-1.12.0.min.js"></script>#}
+{#    <script src="static/js/jquery-ui.min.js"></script>#}
+{#    <script src="static/js/popper.js"></script>#}
+{#    <script src="static/js/bootstrap.min.js"></script>#}
+{#    <script src="static/js/jquery.counterup.min.js"></script>#}
+{#    <script src="static/js/waypoints.min.js"></script>#}
+{#    <script src="static/js/elevetezoom.js"></script>#}
+{#    <script src="static/js/ajax-mail.js"></script>#}
+{#    <script src="static/js/owl.carousel.min.js"></script>#}
+{#    <script src="static/js/plugins.js"></script>#}
+{#    <script src="static/js/shop.js"></script>#}
+{#    <script src="static/js/slider.js"></script>#}
+    <script text = "text/javascript" src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script text = "text/javascript" src="{{ url_for('static',filename = 'js/product_details.js') }}"></script>
+
+
+{% endblock %}
+{% block content %}
+{{ super() }}
+
+        <div class="shop-area pt-95 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product-details-img owl-carousel" id="owl-demo">
+{#                        <video class="item media" autoplay="autoplay" style="width: inherit; height:inherit ">#}
+{#                            <source src="{{ url_for('static', filename='img/19206176+BaoqQinghang+part2practice.mov') }}">#}
+{#                        </video>#}
+                        {% for img in product.product_imgs %}
+                            <a class="item">
+                                <img src="{{ url_for('static', filename='img/product/pic/{}'.format(img.img_path)) }}" alt="zoom"/>
+                            </a>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product-details-content">
+                            <h1>
+                                {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                                    {{ product.name_chinese }}
+                                {% else %}
+                                    {{ product.product_name }}
+                                {% endif %}
+                            </h1>
+                            <div class="product-rating">
+                                {% for i in range( score|int) %}
+                                    <i class="ti-star theme-color"></i>
+                                {% endfor %}
+                                <strong class="ratting-author">{{ score }}</strong>
+                                <br>
+                                <span> {{_(" %(number)d Customer Review ",number = comments | length)}}</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="new">${{ product.product_price }}</span>
+{#                                <span class="old">$50.00</span>#}
+                            </div>
+                        {% if product.product_state == "Published" %}
+                            {% if product.product_inventory | int < 10 %}
+                                <div class="in-stock">
+                                    <span style="color: red"><i class="ion-android-checkbox-outline"></i>{{ _("Stock Shortage:")}} <br>  {{ _("Inventory:")  }} {{ product.product_inventory }}</span>
+                                </div>
+                            {% else %}
+                                <div class="in-stock">
+                                    <span><i class="ion-android-checkbox-outline"></i> {{ _("In Stock:") }} {{ product.product_inventory }}</span>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                            <div class="sku">
+{#                                <span>SKU#: MS04</span>#}
+                            </div>
+{#                            <div class="description">#}
+{#                                {% if request.cookies.get('locale') == 'zh_Hans_CN' %}#}
+{#                                    {{ product.description_chinese }}#}
+{#                                {% else %}#}
+{#                                    {{ product.product_description }}#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{#                            <div class="product-details-style shorting-style mt-30">#}
+{#                                <label>color:</label>#}
+{#                                <select>#}
+{#                                    <option value=""> Choose an option</option>#}
+{#                                    <option value=""> orange</option>#}
+{#                                    <option value=""> pink</option>#}
+{#                                    <option value=""> yellow</option>#}
+{#                                </select>#}
+{#                            </div>#}
+                            <div class="quality-wrapper mt-30 product-quantity">
+                                <label>{{ _("Qty:")}}</label>
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                </div>
+                            </div>
+                            <div class="product-list-action">
+                                {% if product.product_state == "Published" %}
+                                    <div class="product-list-action-left">
+                                        <button class="btn btn-outline-secondary" id="addToCart_detail"
+                                                title={{ _("Add to cart") }}>
+                                            <i class="icon-bag"></i>
+                                            {{ _("Add to cart") }}
+                                        </button>
+                                    </div>
+                                    <div class="product-list-action-right">
+                                        {% if product.product_video %}
+                                            <a title="{{ _("Video") }}" href="#mediaModal" onclick="playMedia()" data-toggle="modal" title={{ _("Video Display")}}><i class="ti-video-camera"></i></a>
+                                        {% endif %}
+                                        <a title={{ _("Consult")}} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                    </div>
+                                {% else %}
+                                    <div class="product-list-action-left">
+                                        <button class="btn btn-outline-danger" title="Has Been Removed" style="font-size: 2em">
+                                            <i class="icon-ban"></i>
+                                            {{ _("Has Been Removed")}}
+                                        </button>
+                                    </div>
+                                    <div class="product-list-action-right">
+                                        <a title={{ _("Consult") }} href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+{#                        <div class="quick-view-learg-img">#}
+{#                            <div class="quick-view-tab-content tab-content">#}
+{#                                {% for img in product.product_imgs %}#}
+{#                                    <div class="tab-pane {% if product.product_imgs %} active show {% endif %} fade" id="{{ img.img_id }}" role="tabpanel">#}
+{#                                             <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(img.img_path)) }}" alt="">#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="quick-view-list nav" role="tablist">#}
+{#                            {% for img in product.product_imgs %}#}
+{#                                <a {% if product.product_imgs %} class="active" {% endif %} href="#{{ img.img_id }}" data-toggle="tab" role="tab">#}
+{#                                    {% for img in product.product_imgs %}#}
+{#                                             <img src="{{ url_for('static', filename = 'img/product/pic/{}'.format(img.img_path)) }}" alt="">#}
+{#                                    {% endfor %}#}
+{#                                </a>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+                            <div class="social-icon mt-30">
+                                <ul>
+                                    <li><a href="#"><i class="icon-social-twitter"></i></a></li>
+                                    <li><a href="#"><i class="icon-social-instagram"></i></a></li>
+                                    <li><a href="#"><i class="icon-social-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="icon-social-skype"></i></a></li>
+                                    <li><a href="#"><i class="icon-social-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--  modal for video -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+                tabindex="-1" id="mediaModal" class="modal fade">
+                <div class="modal-dialog" style="margin-top:5%;">
+                    <div class="modal-content">
+                        <div class="modal-header" >
+                            <h4 class="modal-title" style="margin-left: 40%; margin-top: 1em;">
+                                {{ _("Video Display") }}
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="ti-close" aria-hidden="true"></span>
+                                <h5 class="modal-button">
+                                <span id="modalExit">{{ _("Close") }}</span>
+                            </h5>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="height: 80% ">
+                            <video controls="controls" width="100%" height="100%" autoplay="autoplay"  volume="1" id="myVideo"  loop="loop">
+                                <source id="media_src" src=""/>
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="description-review-area pb-100">
+            <div class="container">
+                <div class="description-review-wrapper gray-bg pt-40">
+                    <div class="description-review-topbar nav text-center">
+                        <a class="active" data-toggle="tab" href="#des-details1">{{ _("PICTURES") }}</a>
+                        <a data-toggle="tab" href="#des-details2">{{ _("MORE INFORMATION")}}</a>
+                        <a data-toggle="tab" href="#des-details3">{{ _("REVIEWS") }} ({{ comments | length }})</a>
+                    </div>
+                    <div class="tab-content description-review-bottom">
+                        <div id="des-details1" class="tab-pane active">
+                            <div class="product-description-wrapper">
+                                {% if product.product_path %}
+                                    <img width="100%" src="{{ url_for('static', filename = 'img/product/poster/{}'.format(product.product_path)) }}">
+                                {% else %}
+                                    <img width="100%" src="{{ url_for('static', filename = 'img/product/poster/poster_default.png') }}">
+                                {% endif %}
+{#                                <p>This stewpot is part of the Scanpan Classic cookware range, which boasts GreenTek non-stick coating which is 100% PFOA free, meaning it's safer for your family and the environment. The heavy-duty, pressure-cast aluminum body has an extra-thick base for quick, even heating and it is compatible with all cooking surfaces (excluding induction). The extraordinarily hard exterior surface is a combination of ceramic and titanium nonstick cooking surface which is impossible to scrape away, even with metal utensils. Patented spring-lock handle stays cool during normal stove top use and the stewpot is also oven safe from up to 260°C. It's also dishwasher safe for easy cleanup. </p>#}
+{#                                <p>Scanpan is designed and manufactured in Denmark and offers a lifetime warranty.</p>#}
+{#                                <ul>#}
+{#                                    <li>Key Features:</li>#}
+{#                                    <li>Heavy duty, pressure cast aluminium with extra thick base for quick heat up</li>#}
+{#                                    <li>Ceramic titanium surface with PFOA-free GreenTek non-stick coating</li>#}
+{#                                    <li>Fat-free frying, metal utensils safe</li>#}
+{#                                    <li>Suitable for all stove tops, except induction</li>#}
+{#                                    <li>Guaranteed not to warp</li>#}
+{#                                    <li>Fast and even heat distribution</li>#}
+{#                                    <li>Ovenproof up to 260°C</li>#}
+{#                                    <li>Dishwasher safe - but not recommended</li>#}
+{#                                    <li>Designed and manufactured in Denmark</li>#}
+{#                                </ul>#}
+                            </div>
+                        </div>
+                        <div id="des-details2" class="tab-pane">
+                            <div class="product-anotherinfo-wrapper">
+                                <ul>
+                                    <li><span>{{ _("Description:") }}
+                                    </span>
+
+                                    <em class="description">
+                                    {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                                        {{ product.description_chinese }}
+                                    {% else %}
+                                        {{ product.product_description }}
+                                    {% endif %}
+                                    </em></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="des-details3" class="tab-pane">
+                            <div class="rattings-wrapper">
+                                {% for comment in comments %}
+                                <div class="sin-rattings border-bottom">
+                                    <div class="star-author-all">
+                                        <div class="product-rating f-left">
+                                            {% for i in range(comment.level) %}
+                                            <i class="ti-star theme-color"></i>
+                                            {% endfor %}
+                                            <span>{{ comment.level }} {{ _("Stars") }}</span>
+
+                                        </div>
+                                        <div class="ratting-author f-right">
+                                            <h3>{{ comment.user.username }}</h3>
+                                            <span>{{ comment.create_time | dt_detail }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="description-review-bottom">{{ comment.content }}
+                                        <button class="items-more__button">
+                                            <svg class="icon-icon-more" style="width: 1em; height: 1em">
+                                                <use xlink:href="#icon-action"></use>
+                                            </svg>
+                                        </button>
+                                    </p>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+{#                            <div class="ratting-form-wrapper">#}
+{#                                <h3>Add your Comments :</h3>#}
+{#                                <div class="ratting-form">#}
+{#                                    <form action="#">#}
+{#                                        <div class="star-box">#}
+{#                                            <h2>Rating:</h2>#}
+{#                                                <div class="product-rating">#}
+{#                                                <i class="ti-star theme-color"></i>#}
+{#                                                <i class="ti-star theme-color"></i>#}
+{#                                                <i class="ti-star theme-color"></i>#}
+{#                                                <i class="ti-star"></i>#}
+{#                                                <i class="ti-star"></i>#}
+{#                                                <span>(3)</span>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="row">#}
+{#                                            <div class="col-md-6">#}
+{#                                                <div class="rating-form-style mb-20">#}
+{#                                                    <input placeholder="Name" type="text">#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-md-6">#}
+{#                                                <div class="rating-form-style mb-20">#}
+{#                                                    <input placeholder="Email" type="text">#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-md-12">#}
+{#                                                <div class="rating-form-style form-submit">#}
+{#                                                    <textarea name="message" placeholder="Message"></textarea>#}
+{#                                                    <input type="submit" value="add review">#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </form>#}
+{#                                </div>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+{% endblock %}

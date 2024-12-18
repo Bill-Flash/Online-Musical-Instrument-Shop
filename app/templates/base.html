@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="light" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    {% block head %}
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap-4.6.1-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/vendor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/coffee.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive.css') }}">    
+
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.5.1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='bootstrap-4.6.1-dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/vendor.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
+    <!-- favicon -->
+    <link rel=icon href="static/img/favicon.png" sizes="20x20" type="image/png">
+    {% endblock %}
+
+</head>
+<body>
+{% block navigation %} {% endblock %}
+{% block content %} {% endblock %}
+{% block footer %}
+    <!-- footer area start -->
+    <footer class="footer-area bg-black">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget widget-about">
+                            <div class="thumb">
+                                <img src="{{ url_for('static', filename = 'img/logo.png') }}" alt="img">
+                            </div>
+{#                            <ul class="social-media">#}
+{#                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>#}
+{#                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
+{#                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>#}
+{#                            </ul>#}
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="widget widget-nav-menu">
+                            <ul>
+                                <li><a href="/">{{ _("HOME") }}</a></li>
+                                <li><a href="/about_us">{{ _("ABOUT US")}}</a></li>
+                                <li><a href="{{ url_for('customer.shop_page') }}">{{ _("PRODUCT") }}</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="widget widget-contact">
+                            <p>{{ _("Cecilia Chapman <br>711-2880 Nulla St.<br>Mankato Mississippi 96522 <br>(123) 4567-8901") }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="copy-right">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><i class="fa fa-angle-up"></i></span>
+    </div>
+    <!-- back to top area end -->
+
+{% endblock %}
+</body>
+</html>

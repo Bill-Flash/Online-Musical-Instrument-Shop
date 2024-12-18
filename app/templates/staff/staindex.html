@@ -1,0 +1,170 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/index.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+     <main class="page-content">
+            <div class="container">
+                <div class="widgets">
+                    <div class="widgets__row row gutter-bottom-xl">
+                        <div class="col-12 col-md-6 col-xl-4 d-flex">
+                            <div class="widget">
+                                <div class="widget__wrapper">
+                                    <div class="widget__row">
+                                        <div class="widget__left">
+                                            <h3 class="widget__title">Profit</h3>
+                                            <div class="widget__status-title text-grey">Total Profit today</div>
+                                            <div class="widget__trade"><span class="widget__trade-count" id="profit-count"></span>
+                                            </div>
+                                        </div>
+                                        <div class="widget__chart">
+                                            <div class="widget__chart-inner">
+                                                <div class="widget__chart-percentage" id="profit-count-percentage">
+                                                </div>
+                                                <div class="widget__chart-caption" >Finished Profit</div>
+                                            </div>
+                                            <div class="widget__chart-canvas js-progress-circle" id="profit-count-circle" data-color="#22CCE2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4 d-flex">
+                            <div class="widget">
+                                <div class="widget__wrapper">
+                                    <div class="widget__row">
+                                        <div class="widget__left">
+                                            <h3 class="widget__title">Orders</h3>
+                                            <div class="widget__status-title text-grey">Total Orders Today</div>
+                                            <div class="widget__trade">
+                                                <span class="widget__trade-count" id="orders-count"></span>
+                                            </div>
+                                        </div>
+                                        <div class="widget__chart">
+                                            <div class="widget__chart-inner">
+                                                <div class="widget__chart-percentage" id="orders-count-percentage">
+                                                </div>
+                                                <div class="widget__chart-caption" >Finished Orders</div>
+                                            </div>
+                                            <div class="widget__chart-canvas js-progress-circle" id="orders-count-circle" data-color="#FDBF5E"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4 d-flex">
+                            <div class="state-widget">
+                                <div class="widget__wrapper">
+                                    <div class="">
+                                        <div class="">
+                                            <h3 class="widget__title">State of Physical Store</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="state-struct">
+                                        <label class="mx-auto"><h4 id="state"></h4></label>
+                                </div>
+
+                                <div style="display: flex">
+                                    <button class="button button--primary mx-auto" id="change-state">
+                                            Change
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="section__title d-none">
+                        <h2>Section</h2>
+                    </div>
+                    <div class="row justify-content-center gutter-bottom-xl">
+                        <div class="col-12 col-lg-7 col-xl-8 d-flex">
+                            <div class="card card--overview">
+                                <div class="card__wrapper">
+                                    <div class="card__container">
+                                        <div class="card__header">
+                                            <div class="card__header-left">
+                                                <h3 class="card__header-title">Weekly Profit</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card__body">
+
+                                            <div class="card__chart">
+                                                <div class="card__container card__container--gutter-sm">
+                                                    <div class="card__chart-item chart-overview" id="overviewLineChart" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5 col-xl-4 d-flex">
+                            <div class="card">
+                                <div class="card__wrapper">
+                                    <div class="card__container">
+                                        <div class="card__header mb-0">
+                                            <div class="card__header-left">
+                                                <h3 class="card__header-title">Orders</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card__body">
+                                            <div class="card__chart">
+                                                <div class="card__chart-item chart-task" id="taskPieChart"></div>
+                                            </div>
+                                            <div class="card__chart-progress">
+                                                <div class="card__chart-progress-item">
+                                                    <div class="card__progressbar">
+                                                        <div class="progressbar">
+                                                            <div class="progressbar__legend"><span class="progressbar__legend-marker" style="color: #FF3D57"></span><span>Canceled/Exception</span>
+                                                            </div>
+                                                            <div class="progressbar__items">
+                                                                <div class="progressbar__bar" style="width: 75%; background-color: #FF3D57;" id="ce-bar"></div>
+                                                            </div>
+                                                            <div class="progressbar__append"><span class="progressbar__percentage" id="ce"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card__chart-progress-item">
+                                                    <div class="card__progressbar">
+                                                        <div class="progressbar">
+                                                            <div class="progressbar__legend"><span class="progressbar__legend-marker" style="color: #FDBF5E"></span><span>In Progress</span>
+                                                            </div>
+                                                            <div class="progressbar__items">
+                                                                <div class="progressbar__bar" style="width: 25%; background-color: #FDBF5E;" id="ip-bar"></div>
+                                                            </div>
+                                                            <div class="progressbar__append"><span class="progressbar__percentage" id="ip"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card__chart-progress-item">
+                                                    <div class="card__progressbar">
+                                                        <div class="progressbar">
+                                                            <div class="progressbar__legend"><span class="progressbar__legend-marker" style="color: #22CCE2"></span><span>Finished</span>
+                                                            </div>
+                                                            <div class="progressbar__items">
+                                                                <div class="progressbar__bar" style="width: 80%; background-color: #22CCE2;" id="finished-bar"></div>
+                                                            </div>
+                                                            <div class="progressbar__append"><span class="progressbar__percentage" id="finished"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+{% endblock %}

@@ -1,0 +1,1176 @@
+# Chinese (Simplified, China) translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-06-01 23:39+0800\n"
+"PO-Revision-Date: 2022-04-05 21:13+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_Hans_CN\n"
+"Language-Team: zh_Hans_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: app/customer/views.py:79
+msgid "Welcome"
+msgstr "欢迎您的到来！"
+
+#: app/customer/views.py:103
+msgid "Shop"
+msgstr "商品展示"
+
+#: app/customer/views.py:135
+#, python-format
+msgid "%(region)s product"
+msgstr "%(region)s地区的乐器"
+
+#: app/customer/views.py:171
+#, python-format
+msgid "%(category)s product"
+msgstr "%(category)s类型的乐器"
+
+#: app/customer/views.py:285
+#, python-format
+msgid "%(name)s's Detail"
+msgstr "%(name)s的商品详情"
+
+#: app/customer/views.py:361
+#, python-format
+msgid "%(username)s's Shopping Cart"
+msgstr "%(username)s的购物车"
+
+#: app/customer/views.py:367 app/customer/views.py:523
+#: app/customer/views.py:569 app/main/views.py:57 app/main/views.py:99
+#: app/templates/customerNav.html:663
+msgid "You are not a customer."
+msgstr "您还不是顾客。"
+
+#: app/customer/views.py:452 app/customer/views.py:518
+#, python-format
+msgid "%(username)s's Order"
+msgstr "%(username)s的订单"
+
+#: app/customer/views.py:550
+#, python-format
+msgid "%(username)s's Profile"
+msgstr "%(username)s的主页"
+
+#: app/customer/views.py:634
+msgid "About Us"
+msgstr "关于我们"
+
+#: app/main/views.py:55
+msgid "you need login first"
+msgstr "你需要先登录"
+
+#: app/main/views.py:225
+msgid " enters the room"
+msgstr "进入了聊天室"
+
+#: app/main/views.py:255
+msgid "Login/Register"
+msgstr "登录/注册"
+
+#: app/main/views.py:281
+msgid "login successfully"
+msgstr "登录成功"
+
+#: app/main/views.py:288
+msgid "You have logged in"
+msgstr "你已经登录了"
+
+#: app/main/views.py:307 app/templates/user/login.html:5
+#: app/templates/user/login_register.html:164
+msgid "Register"
+msgstr "注册"
+
+#: app/templates/about_us.html:36
+msgid "About "
+msgstr "关于"
+
+#: app/templates/about_us.html:37
+msgid ""
+"In the past 50 years, Very shop has gradually developed from a small and "
+"obscure\n"
+"                             piano production factory to Very company. "
+"whose main economic and technical indexes rank\n"
+"                              first in the same industry in London and "
+"whose production and sales scale has jumped to\n"
+"                               the first place in the world."
+msgstr "50年来，Very公司由一家默默无闻的钢琴生产小厂，逐步发展成为各项主要经济技术指标居全国同行业首位、产销规模跃居全球第一的Very集团有限公司。"
+
+#: app/templates/about_us.html:43
+msgid "The trademark of Very company was awarded."
+msgstr "满分牌商标荣获大奖。"
+
+#: app/templates/about_us.html:44
+msgid "Contrary to popular belief is not simply"
+msgstr "与潮流信条相反绝非易事"
+
+#: app/templates/about_us.html:45
+msgid "Increasing brand value"
+msgstr "不断增长的品牌价值"
+
+#: app/templates/about_us.html:46
+msgid "If you have any question, please email us: "
+msgstr "如果您有任何疑惑，请发邮件与我们联系："
+
+#: app/templates/about_us.html:47
+msgid ""
+"If you have login, please directly chat with us by clicking the following"
+" button."
+msgstr "如您已经登录，可直接点击下方按钮与我们沟通。"
+
+#: app/templates/about_us.html:51
+msgid "CONTACT US"
+msgstr "联系我们"
+
+#: app/templates/about_us.html:64
+msgid "Years in Business"
+msgstr "年商业经验"
+
+#: app/templates/about_us.html:70
+msgid "Satisfaction"
+msgstr "满意度"
+
+#: app/templates/about_us.html:76
+msgid "Billion Sales"
+msgstr "十亿订单"
+
+#: app/templates/about_us.html:82
+msgid "Award Winning"
+msgstr "获奖"
+
+#: app/templates/about_us.html:140
+msgid "OUR TEAM"
+msgstr "我们团队"
+
+#: app/templates/about_us.html:141
+msgid "We are comprised of fantastic staffs."
+msgstr "我们是由一群充满活力的员工所组成。"
+
+#: app/templates/about_us.html:150
+msgid "Adam Jonson"
+msgstr "阿达 强森"
+
+#: app/templates/about_us.html:151
+msgid "Manager"
+msgstr "经理"
+
+#: app/templates/about_us.html:161
+msgid "Rose Evans"
+msgstr "螺丝 伊娃"
+
+#: app/templates/about_us.html:162
+msgid "Shopping Guide "
+msgstr "购物指导"
+
+#: app/templates/about_us.html:172
+msgid "Bruce Cole"
+msgstr "布鲁斯 可乐"
+
+#: app/templates/about_us.html:173
+msgid "Customer Service"
+msgstr "客服"
+
+#: app/templates/about_us.html:183
+msgid "Debra Lane"
+msgstr "德扒 兰"
+
+#: app/templates/about_us.html:184
+msgid "Deliveryman"
+msgstr "快递员"
+
+#: app/templates/base.html:49 app/templates/customerNav.html:466
+#: app/templates/customerNav.html:564
+msgid "HOME"
+msgstr "首页"
+
+#: app/templates/base.html:50 app/templates/customer.html:58
+msgid "ABOUT US"
+msgstr "关于我们"
+
+#: app/templates/base.html:51 app/templates/customerNav.html:468
+#: app/templates/customerNav.html:566
+msgid "PRODUCT"
+msgstr "商品"
+
+#: app/templates/base.html:58
+msgid ""
+"Cecilia Chapman <br>711-2880 Nulla St.<br>Mankato Mississippi 96522 "
+"<br>(123) 4567-8901"
+msgstr "北京 <br>711-2880 西大望路<br>北京工业大学 96522 <br>(123) 4567-8901"
+
+#: app/templates/chat.html:324
+msgid "Write a Message"
+msgstr "写消息"
+
+#: app/templates/chat.html:438 app/templates/chat.html:476
+#: app/templates/chat.html:606 app/templates/chat.html:651
+#: app/templates/chat.html:708 app/templates/chat.html:744
+msgid "moment ago"
+msgstr "即刻之前"
+
+#: app/templates/chat.html:537
+msgid "Please enter some words!"
+msgstr "请输入一些文字"
+
+#: app/templates/customer.html:12 app/templates/customer.html:28
+msgid "MUSIC"
+msgstr "乐器"
+
+#: app/templates/customer.html:59 app/templates/customer.html:135
+#: app/templates/customerNav.html:447
+msgid "We have carefully selected great instruments from around the world."
+msgstr "为您提供精心挑选来自世界各地的乐器"
+
+#: app/templates/customer.html:69 app/templates/customer.html:148
+msgid ""
+"Since the middle and the end of the 19th century, Europe has seen the "
+"rise of the retro style,\n"
+"                                             and the splendid ancient "
+"architectural clusters in European cities. "
+msgstr "自19世纪中、末叶欧洲又兴起了复古之风，欧洲各大中城市保存完好的辉煌古建筑群落、文艺复兴时期的文学、美术、音乐等古典文化艺术长久的生命力使古钢琴又再着盛装，走上舞台。"
+
+#: app/templates/customer.html:71 app/templates/customer.html:150
+#: app/templates/customer.html:165
+msgid "Read More"
+msgstr "了解更多"
+
+#: app/templates/customer.html:83
+msgid "OUR PRODUCT"
+msgstr "我们的产品"
+
+#: app/templates/customer.html:84
+msgid "Instruments are committed to positively impacting the quality of life"
+msgstr "乐器致力于积极影响生活质量"
+
+#: app/templates/customer.html:134
+msgid "WE SERVE"
+msgstr "我们提供"
+
+#: app/templates/customer.html:147
+msgid "Western <br> Instrument"
+msgstr "西洋 <br> 乐器"
+
+#: app/templates/customer.html:162
+msgid "Chinese <br> Instrument"
+msgstr "民族 <br> 乐器"
+
+#: app/templates/customer.html:163
+msgid ""
+"The guzheng is an ancient Han Chinese musical instrument that flourished "
+"in the Qin Dynasty\n"
+"                         during the Warring States period and has a "
+"history of over 2,500 years."
+msgstr "古筝是一件古老的汉民乐器，战国时期盛行于秦地，已经有2500年以上的历史了。"
+
+#: app/templates/customer.html:766 app/templates/customer.html:794
+msgid ""
+"Since the middle and the end of the 19th century, Europe has seen the "
+"rise of the retro style,\n"
+"                                             and the splendid ancient "
+"architectural clusters in European cities and the long-lasting vitality "
+"of Renaissance\n"
+"                                             literature, art, music and "
+"other classical culture and arts have made the ancient piano dress up "
+"again and take to the stage. "
+msgstr ""
+"自19世纪中、末叶欧洲又兴起了复古之风，欧洲各大中城市保存完好的辉煌古建筑群落、文艺复兴时期的文学、美术、音乐等古典文化艺术长久的生命力使古钢琴又再着盛装，走上舞台。这正是我们人类在快速前进的路途之中回首望去所发现的不该丢弃的宝贵财富。于是巴洛克时期的音乐重新奏响，古钢琴又翻开了新的篇章。"
+" "
+
+#: app/templates/customerBase.html:34 app/templates/customerNav.html:651
+msgid "Notification"
+msgstr "通知"
+
+#: app/templates/customerBase.html:50
+#: app/templates/user/login_register.html:111
+msgid "Confirmation"
+msgstr "再次确认"
+
+#: app/templates/customerBase.html:59 app/templates/customerProfile.html:1878
+msgid "Confirm"
+msgstr "确认"
+
+#: app/templates/customerNav.html:431
+msgid "Search"
+msgstr "搜索"
+
+#: app/templates/customerNav.html:470 app/templates/customerNav.html:568
+msgid "All"
+msgstr "全部种类"
+
+#: app/templates/customerNav.html:471 app/templates/customerNav.html:569
+msgid "WESTERN"
+msgstr "西洋乐器"
+
+#: app/templates/customerNav.html:472 app/templates/customerNav.html:570
+msgid "CHINESE"
+msgstr "民族乐器"
+
+#: app/templates/customerNav.html:506 app/templates/customerNav.html:598
+msgid "Tourist"
+msgstr "游客"
+
+#: app/templates/customerNav.html:518 app/templates/customerNav.html:611
+msgid "Profile"
+msgstr "个人主页"
+
+#: app/templates/customerNav.html:523 app/templates/customerNav.html:616
+msgid "My chat"
+msgstr "聊天"
+
+#: app/templates/customerNav.html:528 app/templates/customerNav.html:621
+msgid "My cart"
+msgstr "我的购物车"
+
+#: app/templates/customerNav.html:534 app/templates/customerNav.html:627
+msgid "Logout"
+msgstr "退出"
+
+#: app/templates/customerNav.html:540 app/templates/customerNav.html:633
+msgid "LOG IN"
+msgstr "登录"
+
+#: app/templates/customerNav.html:575
+msgid "LANGUAGE"
+msgstr "语言"
+
+#: app/templates/customerNav.html:665
+msgid "Please log in first!"
+msgstr "你需要先登录"
+
+#: app/templates/customerProfile.html:951
+msgid "Account"
+msgstr "账户"
+
+#: app/templates/customerProfile.html:1108
+#: app/templates/customerProfile.html:1478
+msgid "Account Details"
+msgstr "账号详情"
+
+#: app/templates/customerProfile.html:1119
+#: app/templates/user/login_register.html:78
+msgid "Username"
+msgstr "用户名"
+
+#: app/templates/customerProfile.html:1128
+msgid "Date of Birth"
+msgstr "生日"
+
+#: app/templates/customerProfile.html:1131
+#: app/templates/customerProfile.html:1143
+msgid "Not assigned"
+msgstr "没设置"
+
+#: app/templates/customerProfile.html:1140
+msgid "Gender"
+msgstr "性别"
+
+#: app/templates/customerProfile.html:1161
+#: app/templates/customerProfile.html:1714
+msgid "Payment methods"
+msgstr "支付方式"
+
+#: app/templates/customerProfile.html:1188
+msgid "Card Type"
+msgstr "卡类别"
+
+#: app/templates/customerProfile.html:1189
+msgid "VISA"
+msgstr "VISA"
+
+#: app/templates/customerProfile.html:1192
+msgid "Card Holder"
+msgstr "持卡人"
+
+#: app/templates/customerProfile.html:1196
+msgid "Expire"
+msgstr "过期时间"
+
+#: app/templates/customerProfile.html:1200
+msgid "Card Number"
+msgstr "银行卡号"
+
+#: app/templates/customerProfile.html:1204
+msgid "Balance"
+msgstr "余额"
+
+#: app/templates/customerProfile.html:1219
+#: app/templates/customerProfile.html:1483
+#: app/templates/customerProfile.html:1668
+msgid "Shopping Address"
+msgstr "购物地址"
+
+#: app/templates/customerProfile.html:1233
+#: app/templates/user/login_register.html:121
+msgid "Address"
+msgstr "地址"
+
+#: app/templates/customerProfile.html:1239
+#: app/templates/customerProfile.html:1679 app/templates/display_order.html:143
+#: app/templates/order.html:156 app/templates/user/login_register.html:130
+msgid "City"
+msgstr "城市"
+
+#: app/templates/customerProfile.html:1245 app/templates/display_order.html:145
+#: app/templates/order.html:158 app/templates/user/login_register.html:144
+msgid "Country"
+msgstr "国家"
+
+#: app/templates/customerProfile.html:1251
+#: app/templates/customerProfile.html:1673
+#: app/templates/user/login_register.html:137
+msgid "State"
+msgstr "州"
+
+#: app/templates/customerProfile.html:1257
+msgid "Zip code"
+msgstr "邮编"
+
+#: app/templates/customerProfile.html:1271
+msgid "Order History"
+msgstr "订单记录"
+
+#: app/templates/customerProfile.html:1276
+msgid "orders in history"
+msgstr "条订单在历史"
+
+#: app/templates/customerProfile.html:1288
+msgid "Made at"
+msgstr "创建于"
+
+#: app/templates/customerProfile.html:1295 app/templates/display_order.html:106
+#: app/templates/order.html:103 app/templates/shopping_cart.html:139
+msgid "Total cost"
+msgstr "总金额"
+
+#: app/templates/customerProfile.html:1298
+msgid "Mark as received"
+msgstr "确认收货"
+
+#: app/templates/customerProfile.html:1300
+msgid "View All"
+msgstr "详情"
+
+#: app/templates/customerProfile.html:1315
+#: app/templates/customerProfile.html:1338
+msgid "Price"
+msgstr "价格"
+
+#: app/templates/customerProfile.html:1316
+#: app/templates/customerProfile.html:1339
+msgid "Number"
+msgstr "数量"
+
+#: app/templates/customerProfile.html:1317
+#: app/templates/customerProfile.html:1340
+msgid "Cost"
+msgstr "花费"
+
+#: app/templates/customerProfile.html:1337
+msgid "Classification"
+msgstr "类别"
+
+#: app/templates/customerProfile.html:1463
+msgid "Click & Drop"
+msgstr "拖动"
+
+#: app/templates/customerProfile.html:1464
+msgid "to change photo"
+msgstr "改头像"
+
+#: app/templates/customerProfile.html:1471
+#: app/templates/customerProfile.html:1661
+#: app/templates/customerProfile.html:1707
+#: app/templates/customerProfile.html:1750
+#: app/templates/customerProfile.html:1795
+msgid "Update"
+msgstr "更新"
+
+#: app/templates/customerProfile.html:1488
+msgid "Payment Methods"
+msgstr "支付方式"
+
+#: app/templates/customerProfile.html:1493
+#: app/templates/customerProfile.html:1758 app/templates/user/login.html:19
+#: app/templates/user/login_register.html:46
+#: app/templates/user/login_register.html:100
+msgid "Password"
+msgstr "密码"
+
+#: app/templates/customerProfile.html:1499
+msgid "Account details"
+msgstr "账号详情"
+
+#: app/templates/customerProfile.html:1516
+msgid "NEW E-Mail"
+msgstr "新电子邮箱"
+
+#: app/templates/customerProfile.html:1522
+msgid "Verify"
+msgstr "确认"
+
+#: app/templates/customerProfile.html:1527
+msgid "Verification Code"
+msgstr "验证码"
+
+#: app/templates/customerProfile.html:1533
+msgid "Date of Birth (optional)"
+msgstr "生日（选填）"
+
+#: app/templates/customerProfile.html:1600
+msgid "January"
+msgstr "一月"
+
+#: app/templates/customerProfile.html:1602
+msgid "February"
+msgstr "二月"
+
+#: app/templates/customerProfile.html:1604
+msgid "March"
+msgstr "三月"
+
+#: app/templates/customerProfile.html:1606
+msgid "April"
+msgstr "四月"
+
+#: app/templates/customerProfile.html:1608
+msgid "May"
+msgstr "五月"
+
+#: app/templates/customerProfile.html:1610
+msgid "June"
+msgstr "六月"
+
+#: app/templates/customerProfile.html:1612
+msgid "July"
+msgstr "七月"
+
+#: app/templates/customerProfile.html:1614
+msgid "August"
+msgstr "八月"
+
+#: app/templates/customerProfile.html:1616
+msgid "September"
+msgstr "九月"
+
+#: app/templates/customerProfile.html:1618
+msgid "October"
+msgstr "十月"
+
+#: app/templates/customerProfile.html:1620
+msgid "November"
+msgstr "十一月"
+
+#: app/templates/customerProfile.html:1622
+msgid "December"
+msgstr "十二月"
+
+#: app/templates/customerProfile.html:1646
+msgid "Gender (optional)"
+msgstr "性别（选填）"
+
+#: app/templates/customerProfile.html:1649
+msgid "Female"
+msgstr "女"
+
+#: app/templates/customerProfile.html:1651
+msgid "Male"
+msgstr "男"
+
+#: app/templates/customerProfile.html:1685
+msgid "House Number and Street"
+msgstr "房号和街道"
+
+#: app/templates/customerProfile.html:1691
+msgid "ZIP Code"
+msgstr "邮编"
+
+#: app/templates/customerProfile.html:1697
+msgid "Phone Number"
+msgstr "电话号码"
+
+#: app/templates/customerProfile.html:1719
+msgid "Name on Card: *"
+msgstr "持卡人"
+
+#: app/templates/customerProfile.html:1725
+msgid "Card Number: *"
+msgstr "银行卡号"
+
+#: app/templates/customerProfile.html:1731
+msgid "Expire Date"
+msgstr "过期时间"
+
+#: app/templates/customerProfile.html:1737
+msgid "CVV Code"
+msgstr "CVV码"
+
+#: app/templates/customerProfile.html:1763
+msgid "Old password"
+msgstr "旧密码"
+
+#: app/templates/customerProfile.html:1778
+msgid "New password"
+msgstr "新密码"
+
+#: app/templates/customerProfile.html:1814
+msgid "Enter your reason for cancelling"
+msgstr "请输入你取消的原因"
+
+#: app/templates/customerProfile.html:1823
+msgid "Submit"
+msgstr "提交"
+
+#: app/templates/customerProfile.html:1833
+msgid "Add comments for your products"
+msgstr "为商品添加评论"
+
+#: app/templates/customerProfile.html:1840
+msgid "Select Product First"
+msgstr "先选择商品"
+
+#: app/templates/customerProfile.html:1847
+msgid "Comment"
+msgstr "评论"
+
+#: app/templates/customerProfile.html:1850
+msgid "Your Star Level"
+msgstr "你给的星级"
+
+#: app/templates/customerProfile.html:1859
+msgid "Change your star level"
+msgstr "改变你给的星级"
+
+#: app/templates/customerProfile.html:1863
+msgid "Write down your comment"
+msgstr "写下你的评论"
+
+#: app/templates/customerProfile.html:1867
+msgid "Your previous comment"
+msgstr "你之前的评论"
+
+#: app/templates/display_order.html:11
+msgid "Details"
+msgstr "详情"
+
+#: app/templates/display_order.html:21
+msgid "Products in this Order"
+msgstr "订单商品"
+
+#: app/templates/display_order.html:29 app/templates/order.html:26
+#: app/templates/shopping_cart.html:39
+msgid "Image"
+msgstr "图片"
+
+#: app/templates/display_order.html:30 app/templates/order.html:27
+#: app/templates/shopping_cart.html:40
+msgid "Product Name"
+msgstr "商品名称"
+
+#: app/templates/display_order.html:31 app/templates/order.html:28
+#: app/templates/shopping_cart.html:41
+msgid "Unit Price"
+msgstr "单价"
+
+#: app/templates/display_order.html:32 app/templates/order.html:29
+#: app/templates/shopping_cart.html:42
+msgid "Qty"
+msgstr "数量"
+
+#: app/templates/display_order.html:33 app/templates/order.html:30
+#: app/templates/shopping_cart.html:43
+msgid "Subtotal"
+msgstr "分总金额"
+
+#: app/templates/display_order.html:82
+msgid "Back to Profile"
+msgstr "返回个人主页"
+
+#: app/templates/display_order.html:138
+msgid "Recipient INFORMATION"
+msgstr "收货信息"
+
+#: app/templates/display_order.html:141 app/templates/order.html:151
+msgid "Recipient Name"
+msgstr "收货人"
+
+#: app/templates/display_order.html:148 app/templates/order.html:160
+#: app/templates/user/login_register.html:151
+msgid "Zip"
+msgstr "邮编"
+
+#: app/templates/display_order.html:150 app/templates/order.html:162
+msgid "Phone"
+msgstr "电话"
+
+#: app/templates/display_order.html:159
+msgid "You can pick up your items in the shop"
+msgstr "你可以去商店领取你的商品"
+
+#: app/templates/display_order.html:160
+msgid "Pick up code"
+msgstr "自提码"
+
+#: app/templates/display_order.html:166
+msgid "The Order ID (You could ask staff for using this)"
+msgstr "订单编号（你可以通过这个询问客服）"
+
+#: app/templates/display_order.html:167
+msgid "Order ID: "
+msgstr "订单号: "
+
+#: app/templates/order.html:11
+msgid "Order and Finish Page"
+msgstr "订单和完成页"
+
+#: app/templates/order.html:21
+msgid "Product List"
+msgstr "商品列表"
+
+#: app/templates/order.html:113 app/templates/shopping_cart.html:143
+msgid "Purchase"
+msgstr "购物"
+
+#: app/templates/order.html:119
+msgid "Services"
+msgstr "服务"
+
+#: app/templates/order.html:124
+msgid "Choose the service that fits you:(Delivery/Pickup)"
+msgstr "选择适合你的服务：（快递/自提）"
+
+#: app/templates/order.html:129
+msgid "Delivery"
+msgstr "快递"
+
+#: app/templates/order.html:131 app/templates/order.html:137
+msgid "Pickup"
+msgstr "自提"
+
+#: app/templates/order.html:134
+msgid ""
+"It's sorry to remind you that our physical store is\n"
+"                                                                closed "
+"due to the pandemic."
+msgstr "很抱歉提醒您，我们实体店由于疫情原因而关闭，导致无法自提。"
+
+#: app/templates/order.html:149
+msgid "USER INFORMATION"
+msgstr "用户信息"
+
+#: app/templates/order.html:163
+msgid "To"
+msgstr "去"
+
+#: app/templates/order.html:164
+msgid "Fill"
+msgstr "填写"
+
+#: app/templates/product_detail.html:60
+#, python-format
+msgid " %(number)d Customer Review "
+msgstr " %(number)d个顾客评论"
+
+#: app/templates/product_detail.html:69
+msgid "Stock Shortage:"
+msgstr "库存紧缺："
+
+#: app/templates/product_detail.html:69
+msgid "Inventory:"
+msgstr "库存数:"
+
+#: app/templates/product_detail.html:73
+msgid "In Stock:"
+msgstr "在仓库:"
+
+#: app/templates/product_detail.html:97
+msgid "Qty:"
+msgstr "数量"
+
+#: app/templates/product_detail.html:106 app/templates/product_detail.html:108
+#: app/templates/shop_page.html:192 app/templates/shop_page.html:193
+#: app/templates/shop_page.html:461 app/templates/shop_page.html:462
+#: app/templates/shop_page.html:663 app/templates/shop_page.html:779
+msgid "Add to cart"
+msgstr "加入购物车"
+
+#: app/templates/product_detail.html:113
+msgid "Video"
+msgstr "视频"
+
+#: app/templates/product_detail.html:113 app/templates/product_detail.html:168
+msgid "Video Display"
+msgstr "视频展示"
+
+#: app/templates/product_detail.html:115 app/templates/product_detail.html:125
+#: app/templates/shop_page.html:100 app/templates/shop_page.html:172
+#: app/templates/shop_page.html:196 app/templates/shop_page.html:369
+#: app/templates/shop_page.html:441 app/templates/shop_page.html:465
+#: app/templates/shop_page.html:666 app/templates/shop_page.html:782
+msgid "Consult"
+msgstr "咨询"
+
+#: app/templates/product_detail.html:121
+msgid "Has Been Removed"
+msgstr "已经被下架"
+
+#: app/templates/product_detail.html:173
+msgid "Close"
+msgstr "关闭"
+
+#: app/templates/product_detail.html:189
+msgid "PICTURES"
+msgstr "图片"
+
+#: app/templates/product_detail.html:190
+msgid "MORE INFORMATION"
+msgstr "更多信息"
+
+#: app/templates/product_detail.html:191
+msgid "REVIEWS"
+msgstr "评论"
+
+#: app/templates/product_detail.html:220
+msgid "Description:"
+msgstr "描述"
+
+#: app/templates/product_detail.html:243
+msgid "Stars"
+msgstr "星"
+
+#: app/templates/shop_page.html:33 app/templates/shop_page.html:302
+msgid "Showing"
+msgstr "展示"
+
+#: app/templates/shop_page.html:35 app/templates/shop_page.html:304
+msgid "of"
+msgstr "从"
+
+#: app/templates/shop_page.html:37 app/templates/shop_page.html:53
+#: app/templates/shop_page.html:57 app/templates/shop_page.html:306
+#: app/templates/shop_page.html:322 app/templates/shop_page.html:326
+msgid "Results"
+msgstr "结果"
+
+#: app/templates/shop_page.html:54 app/templates/shop_page.html:58
+#: app/templates/shop_page.html:323 app/templates/shop_page.html:327
+msgid "by matching"
+msgstr "通过搜索"
+
+#: app/templates/shop_page.html:92 app/templates/shop_page.html:164
+#: app/templates/shop_page.html:361 app/templates/shop_page.html:433
+msgid "Quick View"
+msgstr "预览"
+
+#: app/templates/shop_page.html:95 app/templates/shop_page.html:167
+#: app/templates/shop_page.html:364 app/templates/shop_page.html:436
+msgid "Add To Cart"
+msgstr "加入购物车"
+
+#: app/templates/shop_page.html:238 app/templates/shop_page.html:507
+msgid "No matching product, please search again!"
+msgstr "没有匹配的商品，换个关键词试试？"
+
+#: app/templates/shop_page.html:246 app/templates/shop_page.html:515
+msgid "Search Products"
+msgstr "搜索商品"
+
+#: app/templates/shop_page.html:249 app/templates/shop_page.html:518
+msgid "Find a product"
+msgstr "搜索商品"
+
+#: app/templates/shop_page.html:257 app/templates/shop_page.html:526
+msgid "Filter By Price"
+msgstr "价格筛选"
+
+#: app/templates/shop_page.html:263 app/templates/shop_page.html:532
+msgid "price"
+msgstr "价格"
+
+#: app/templates/shop_page.html:264 app/templates/shop_page.html:533
+msgid "Add Your Price"
+msgstr "价格区间"
+
+#: app/templates/shop_page.html:266 app/templates/shop_page.html:535
+msgid "Filter"
+msgstr "筛选"
+
+#: app/templates/shop_page.html:272 app/templates/shop_page.html:541
+msgid "Western"
+msgstr "西洋乐器"
+
+#: app/templates/shop_page.html:284 app/templates/shop_page.html:553
+msgid "Chinese"
+msgstr "民族乐器"
+
+#: app/templates/shop_page.html:622 app/templates/shop_page.html:738
+msgid "Stock Shortage"
+msgstr "库存紧缺"
+
+#: app/templates/shop_page.html:623 app/templates/shop_page.html:739
+msgid "Inventory"
+msgstr "库存数"
+
+#: app/templates/shop_page.html:626 app/templates/shop_page.html:742
+msgid "In Stock"
+msgstr "在仓库"
+
+#: app/templates/shopping_cart.html:28
+msgid "Your cart items"
+msgstr "购物车商品"
+
+#: app/templates/shopping_cart.html:37
+msgid "Select"
+msgstr "选择"
+
+#: app/templates/shopping_cart.html:44
+msgid "Delete"
+msgstr "删除"
+
+#: app/templates/shopping_cart.html:98
+msgid "No Item In Your Cart. Have A"
+msgstr "购物车里空空如也，快来"
+
+#: app/templates/shopping_cart.html:98
+msgid "LooK"
+msgstr "挑选吧"
+
+#: app/templates/shopping_cart.html:112
+msgid "Continue Shopping"
+msgstr "继续购物"
+
+#: app/templates/shopping_cart.html:128
+msgid "Select All"
+msgstr "全选"
+
+#: app/templates/shopping_cart.html:133
+msgid "Delete Selected"
+msgstr "删除已选"
+
+#: app/templates/user/login.html:11 app/templates/user/login_register.html:38
+msgid "Username / Email"
+msgstr "用户名/电子邮箱"
+
+#: app/templates/user/login.html:13 app/templates/user/login_register.html:40
+msgid "Enter your username or email address"
+msgstr "输入你的用户名或电子邮箱"
+
+#: app/templates/user/login.html:15 app/templates/user/login.html:22
+#: app/templates/user/login_register.html:42
+#: app/templates/user/login_register.html:50
+#: app/templates/user/login_register.html:84
+#: app/templates/user/login_register.html:92
+#: app/templates/user/login_register.html:107
+#: app/templates/user/login_register.html:115
+#: app/templates/user/login_register.html:125
+#: app/templates/user/login_register.html:133
+#: app/templates/user/login_register.html:140
+#: app/templates/user/login_register.html:147
+#: app/templates/user/login_register.html:154
+msgid "Please enter a message in the textarea."
+msgstr "在文本框内输入信息"
+
+#: app/templates/user/login.html:20 app/templates/user/login_register.html:48
+msgid "Enter your password "
+msgstr "输入你的密码"
+
+#: app/templates/user/login.html:26 app/templates/user/login_register.html:62
+msgid "Login"
+msgstr "登录"
+
+#: app/templates/user/login_register.html:12
+#: app/templates/user/login_register.html:19
+msgid "login"
+msgstr "登录"
+
+#: app/templates/user/login_register.html:15
+#: app/templates/user/login_register.html:22
+msgid "register"
+msgstr "注册"
+
+#: app/templates/user/login_register.html:60
+msgid "Do not have an account?"
+msgstr "还没账户？"
+
+#: app/templates/user/login_register.html:81
+msgid "6-30 characters without space"
+msgstr "6-30个符号（空格除外）"
+
+#: app/templates/user/login_register.html:88
+msgid "Email"
+msgstr "电子邮箱"
+
+#: app/templates/user/login_register.html:90
+msgid "Get Verification Code"
+msgstr "获取验证码"
+
+#: app/templates/user/login_register.html:96
+msgid "Your verification code in mailbox"
+msgstr "输入你邮箱内的验证码"
+
+#: app/templates/user/login_register.html:102
+msgid "Enter your password here"
+msgstr "输入你的密码"
+
+#: app/templates/user/login_register.html:104
+msgid "8-20 characters long with only numbers, letters and underlines"
+msgstr "8-20位符号（只包含数字，字母，下划线）"
+
+#: app/templates/user/login_register.html:113
+msgid "Enter your password again"
+msgstr "再次输入"
+
+#: app/templates/user/login_register.html:123
+msgid "xxxx Main Street"
+msgstr "xxx街道"
+
+#: app/templates/user/login_register.html:161
+msgid "Agree the website policy"
+msgstr "同意本网站政策"
+
+#~ msgid "product's Detail"
+#~ msgstr "商品的详情"
+
+#~ msgid "Shipping Address"
+#~ msgstr ""
+
+#~ msgid "Until Price"
+#~ msgstr "单价"
+
+#~ msgid "Instrument"
+#~ msgstr "乐器"
+
+#~ msgid ""
+#~ "Your\n"
+#~ "                                                       "
+#~ "verification code in mailbox"
+#~ msgstr "在邮箱的验证码"
+
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgid "Tasks"
+#~ msgstr "任务"
+
+#~ msgid "Various Music Instruments"
+#~ msgstr "不同种类乐器"
+
+#~ msgid "View More"
+#~ msgstr "观看更多"
+
+#~ msgid "Switch to %(locale)s successfully!"
+#~ msgstr "成功切换%(locale)s语言"
+
+#~ msgid ""
+#~ "Lorem ipsum dolor sit amet, consectetur"
+#~ " adipis elit, sed do eiusmod tempor"
+#~ " incididu ut\n"
+#~ "                                    labore et dolore"
+#~ " magna aliqua. Ut enim ad minim "
+#~ "quis nostrud exercitat ullamco laboris\n"
+#~ "                                    nisi ut aliquip"
+#~ " ex ea commodo consequat."
+#~ msgstr ""
+#~ "这是一些展示时用的广告词用来吸引游客，充满美丽 十分重要\n"
+#~ "                                    我们的店铺十分出名，独一无二 "
+#~ "应该有越来越多的人选择加入我们，并且购买我们的产品.\n"
+#~ "                                    你就是下一个我们"
+
+#~ msgid "There are many variations of passages"
+#~ msgstr "这里有不同种类的乐器"
+
+#~ msgid "But I must explain to you how all this mistaken"
+#~ msgstr "我想您解释这是为什么"
+
+#~ msgid "Happy People"
+#~ msgstr "开心人"
+
+#~ msgid ""
+#~ "Sed sagittis sodales lobortis. Curabitur "
+#~ "in eleifend turpis, id vehicula odio."
+#~ " Donec\n"
+#~ "                                    pulvinar fend "
+#~ "turpis, bitur in eleif id vehicula "
+#~ "odio. Donec tellus egetmagna ultricies.\n"
+#~ ""
+#~ "                                    Praesent gravida"
+#~ msgstr ""
+#~ "这是一些展示时用的广告词用来吸引游客，充满美丽 十分重要\n"
+#~ "                                    我们的店铺十分出名，独一无二 "
+#~ "应该有越来越多的人选择加入我们，并且购买我们的产品.\n"
+#~ "                                    你就是下一个我们"
+
+#~ msgid ""
+#~ "Stis sodales lobortis. Curabitur in "
+#~ "eleifend turpis, id vehicula odio. Donec"
+#~ " pulvinar\n"
+#~ "                                    tellus egetmagna "
+#~ "aliquet ultricies. Praesent"
+#~ msgstr ""
+#~ "这是一些展示时用的广告词用来吸引游客，充满美丽。 十分重要\n"
+#~ "                                    我们的店铺十分出名，独一无二。 加入我们"
+
+#~ msgid ""
+#~ "Sed sagittis sodales lobortis. Curabitur "
+#~ "in eleifend turpis, id vehicula odio."
+#~ " Donec\n"
+#~ "                                pulvinar tellus "
+#~ "egetmagna aliquet ultricies. Praesent gravida"
+#~ msgstr ""
+#~ "这是一些展示时用的广告词用来吸引游客，充满美丽 十分重要\n"
+#~ "                                    我们的店铺十分出名，独一无二 "
+#~ "应该有越来越多的人选择加入我们，并且购买我们的产品.\n"
+#~ "                                    你就是下一个我们"
+
+#~ msgid ""
+#~ "Sed sagittis sodales lobortis. Curabitur in eleifend turpis, <br> id\n"
+#~ "                                                    vehicula "
+#~ "odio. Donec pulvinar tellus <br> "
+#~ "egetmagna aliquet ultricies.\n"
+#~ "                                                    Praesent gravida"
+#~ msgstr ""
+#~ "这是一些展示时用的广告词用来吸引游客，充满美丽 十分重要\n"
+#~ "                                    我们的店铺十分出名，独一无二 "
+#~ "应该有越来越多的人选择加入我们，并且购买我们的产品.\n"
+#~ "                                    你就是下一个我们"
+
+#~ msgid "REVIEWS (2)"
+#~ msgstr "评论"
+
+#~ msgid "min ago"
+#~ msgstr "分钟前"
+
+#~ msgid "Moment Ago"
+#~ msgstr "刚刚"
+
+#~ msgid "Remember me"
+#~ msgstr "记住我"
+
+#~ msgid "Class"
+#~ msgstr "类别"
+
+#~ msgid ""
+#~ "Please <a style='color: #05c0f5; text-decoration: underline'\n"
+#~ "                            href='{{ "
+#~ "url_for('main.confirm_login') }}'>log in </a> "
+#~ "first!"
+#~ msgstr ""
+#~ "请先<a style='color: #05c0f5; text-decoration: underline'\n"
+#~ "                            href='{{ "
+#~ "url_for('main.confirm_login') }}'>登录</a>!"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "The Order ID:"
+#~ msgstr "订单编号"
+

@@ -1,0 +1,91 @@
+{% extends "shop_page.html" %}
+{% block list %}
+    <div class="grid-list-options">
+        <ul class="view-mode">
+            <li><a href="/shop_page" data-view="product-grid"><i class="ti-layout-grid4-alt"></i></a></li>
+            <li class="active"><a href="#" data-view="product-list"><i class="ti-align-justify"></i></a></li>
+        </ul>
+</div>
+{% endblock %}
+{% block product %}
+    <div class="grid-list-product-wrapper">
+        <div class="product-view product-list">
+        <!--  goods  -->
+            <div class="row">
+                {% for product in products %}
+                    <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
+                        <div class="product-wrapper mb-10">
+                            <!--  picture&details  -->
+                            <div class="product-img">
+                                <a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">
+                                    {% if product.product_imgs.first() %}
+                                        <img src="{{ url_for('static', filename = 'img/product/{}'.format(product.product_imgs.first().img_path)) }}" alt="">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename = 'img/product/food-catigory-2.png') }}" alt="">
+                                    {% endif %}
+                                </a>
+                                <div class="product-action">
+                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                        <i class="ti-plus"></i>
+                                    </a>
+                                    <a title="Add To Cart" href="#">
+                                        <i class="ti-shopping-cart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-action-wishlist">
+                                    <a title="Consult" href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-list-content">
+                                <h4><a href="{{ url_for('customer.product_detail', pro_id = product.product_id) }}">{{ product.product_name }}</a></h4>
+                                <div class="product-price">
+                                    <span class="new">${{ product.product_price }}</span>
+                                </div>
+                                <p>{{ product.product_description }}</p>
+                                <div class="product-list-action">
+                                    <div class="product-list-action-left">
+                                        <a id="{{ product.product_id }}" class="addtocart-btn" title="Add to cart" href="#"><i class="ion-bag"></i> Add to cart</a>
+                                    </div>
+                                    <div class="product-list-action-right">
+                                        <a title="Consult" href="{{ url_for('main.chat_product', pro_id = product.product_id) }}"><i class="ti-comments"></i></a>
+                                        <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#"><i class="ti-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- pagination for product -->
+            <div class="pagination-style text-center mt-10">
+                <ul>
+                    <li>
+                        <a  href="{% if pagination.has_prev %}{{ url_for(endpoint,
+                                       page = pagination.page - 1, per_page = per_page) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-left"></i></a>
+                    </li>
+                    {% for p in pagination.iter_pages(left_edge=1, left_current=1, right_edge=1, right_current=2) %}
+                        {%if p%}
+                            {% if p == pagination.page %}
+                                <li >
+                                    <a class="active" href="{{ url_for(endpoint, page = p, per_page = per_page) }}">{{ p }}</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ url_for(endpoint, page = p, per_page = per_page) }}">{{ p }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="disabled"><a href="javascript:void(0);">&hellip;</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li>
+                        <a href="{% if pagination.has_next %}{{ url_for(endpoint,
+                        page = pagination.page + 1, per_page = per_page) }}{% else %}javascript:void(0);{% endif %}"><i class="icon-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

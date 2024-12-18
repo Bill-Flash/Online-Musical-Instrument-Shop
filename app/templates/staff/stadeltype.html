@@ -1,0 +1,69 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/addtype.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/deltype.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Delete Category</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+{#                        <form class="add-product__form" action="/staff/deltype" enctype="multipart/form-data"#}
+{#                              method="post">#}
+{#                            {{ form.hidden_tag() }}#}
+                            <div class="add-product__row">
+                                <div class="add-product__slider" id="addProductSlider">
+                                    <img class="left-image" src="{{ url_for('static',filename='img/staff/mis1.png') }}"
+                                         alt="">
+                                </div>
+
+                                <div class="add-product__right mid-vertical">
+                                    <div class="row row--md">
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Region</label>
+                                            <div class="input-group input-group--append">
+                                                 <select id="region" class="input js-input-select input--fluid">
+                                        <option value="Western" selected="selected">Western</option>
+                                        <option value="Chinese">Chinese</option>
+                                </select>
+                                                <span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg>
+                                    </span>
+                                                </div>
+                                        </div>
+                                            <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Category Name</label>
+                                            <div class="input-group input-group--append">
+                                                <select id="type" class="input js-input-select input--fluid">
+                                        <option value="Piano" selected="selected">Piano</option>
+                                                    </select>
+
+                                                <span class="input-group__arrow">
+                        <svg class="icon-icon-keyboard-down">
+                          <use xlink:href="#icon-keyboard-down"></use>
+                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <button class="button button--primary button--block" id="submit">Delete</button>
+{#                                            {{ form.submit(class="button button--primary button--block", id="submit", type="submit", value="Delete") }}#}
+                                    </div>
+                                </div>
+                            </div>
+{#                        </form>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

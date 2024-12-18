@@ -1,0 +1,203 @@
+{% extends "staff/stabase.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/staff/infomi.css') }}">
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/staff/infomi.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-header__title">Musical Instrument Details</h1>
+            </div>
+            <div class="card add-product card--content-center">
+                <div class="card__wrapper">
+                    <div class="card__container">
+                        <div class="add-product__form">
+
+
+                            {#                            <form class="add-product__form" action="/staff/add" enctype="multipart/form-data" method="post">#}
+                            {#                                {{ form.hidden_tag() }}#}
+                            <div class="add-product__row">
+                                {#                                    <div class="add-product__slider" id="addProductSlider">#}
+                                {#                                <img class="left-image" src="{{ url_for('static',filename='img/staff/mis.png') }}" alt="">#}
+                                {#                            </div>#}
+                                <div class="add-product__slider imgs" id="addProductSlider">
+                                    <div class="add-product__thumbs">
+                                        <div class="add-product__thumbs-slider swiper-container">
+                                            <div class="swiper-wrapper">
+                                                {#                                                    <div class="add-product__thumb swiper-slide">#}
+                                                {#                                                        <img class="add-product__thumb-image swiper-lazy" src="product_pic/poster/2022-03-12_10.33.15.png" alt="#">#}
+                                                {#                                                        <div class="add-product__lazy-preloader swiper-lazy-preloader"></div>#}
+                                                {#                                                    </div>#}
+                                                {% for img in imgs %}
+                                                    <div class="add-product__thumb swiper-slide">
+                                                        <img class="add-product__thumb-image swiper-lazy"
+                                                             src="../../static/img/product/pic/{{ img.img_path }}"
+                                                             srcset="../../static/img/product/pic/{{ img.img_path }}"
+                                                             alt="#">
+                                                        <div class="add-product__lazy-preloader swiper-lazy-preloader"></div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% if product.product_path != None  %}
+                                                    <div class="add-product__thumb swiper-slide">
+                                                        <img class="add-product__thumb-image swiper-lazy"
+                                                            src="../../static/img/product/poster/{{ product.product_path }}"
+                                                            srcset="../../static/img/product/poster/{{ product.product_path }}"
+                                                            alt="#">
+                                                        <div class="add-product__lazy-preloader swiper-lazy-preloader"></div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="add-product__thumbs-prev">
+                                            <a class="add-product__thumbs-arrow add-product__thumbs-arrow--prev"
+                                               href="#">
+                                                <svg class="icon-icon-chevron">
+                                                    <use xlink:href="#icon-chevron"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="add-product__thumbs-next">
+                                            <a class="add-product__thumbs-arrow add-product__thumbs-arrow--next"
+                                               href="#">
+                                                <svg class="icon-icon-chevron">
+                                                    <use xlink:href="#icon-chevron"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="add-product__gallery">
+                                        <div class="add-product__gallery-slider swiper-container">
+                                            <div class="swiper-wrapper">
+                                                {% for img in imgs %}
+                                                    <div class="add-product__gallery-slide swiper-slide">
+                                                        <img class="add-product__gallery-image swiper-lazy"
+                                                             src="../../static/img/product/pic/{{ img.img_path }}"
+                                                             srcset="../../static/img/product/pic/{{ img.img_path }}"
+                                                             alt="#">
+                                                        <div class="add-product__lazy-preloader swiper-lazy-preloader"></div>
+                                                    </div>
+                                                {% endfor %}
+                                                <div class="add-product__gallery-slide swiper-slide">
+                                                    <img class="add-product__gallery-image swiper-lazy"
+                                                         src="../../static/img/product/poster/{{ product.product_path }}"
+                                                         srcset="../../static/img/product/poster/{{ product.product_path }}"
+                                                         alt="#">
+                                                    <div class="add-product__lazy-preloader swiper-lazy-preloader"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-product__right">
+                                    <div class="row row--md">
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">ID</label>
+                                            <div class="input" id="pro_id">{{ product.product_id }}</div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Musical Instrument Name</label>
+                                            <div class="input-group">
+                                                <div class="input" id="name">{{ product.product_name }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Description</label>
+                                            <textarea class="input des"
+                                                      readonly="readonly">{{ product.product_description }}</textarea>
+
+
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">Category</label>
+                                            <div class="input-group input-group--append">
+                                                <div class="input">{{ product.product_classification }}</div>
+                                                <span class="input-group__arrow">
+                              <svg class="icon-icon-keyboard-down">
+                                <use xlink:href="#icon-keyboard-down"></use>
+                              </svg></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group form-group--lg">
+                                            <label class="form-label">Price</label>
+                                            <div class="input-group input-group--prepend">
+                                                <div class="input-group__prepend"><span
+                                                        class="input-group__symbol">$</span>
+                                                </div>
+                                                <div class="input">{{ product.product_price }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group form-group--lg">
+                                            <label class="form-label">Inventory</label>
+                                            <div class="input-group input-group--prepend">
+                                                <div class="input">{{ product.product_inventory }}</div>
+                                                {#                                            {{ form.inventory(class="input", max="999999999", min="0", placeholder="", required="required", type="number", value="10") }}#}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 form-group form-group--lg">
+                                            <label class="form-label">video</label>
+                                            <video src="../../static/video/{{ product.product_video }}"
+                                                   controls="controls"></video>
+                                        </div>
+                                        {#                                                                            <div class="col-12 form-group form-group--lg">#}
+                                        {#                                                                                <label class="form-label">Images</label>#}
+                                        {#                                                                                <div class="input"></div>#}
+                                        {#                                                                                <div class="input"></div>#}
+                                        {#                                                                                <div class="input"></div>#}
+                                        {#                                                                                <div class="input"></div>#}
+                                        {#                                                                                <div class="input"></div>#}
+
+
+                                        {#                                                                                {{ form.image1() }}#}
+                                        {#                                                                                {{ form.image2() }}#}
+                                        {#                                                                                {{ form.image3() }}#}
+                                        {#                                                                                {{ form.image4() }}#}
+                                        {#                                                                                {{ form.image5() }}#}
+                                        {#                                                                            </div>#}
+
+                                    </div>
+                                    <div class="">
+                                        <button class="button button--primary button--block" id="edit">Edit</button>
+                                        {#                                        {{ form.submit(class="button button--primary button--block", id="submit", type="submit", value="Create") }}#}
+                                    </div>
+                                </div>
+                            </div>
+                            {#                            </form>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock %}
+{% block othercontent %}
+    {#    <div class="modal modal-compact modal-success" id="addProductSuccess">#}
+    {#        <div class="modal__overlay" data-dismiss="modal"></div>#}
+    {#        <div class="modal__wrap">#}
+    {#            <div class="modal__window">#}
+    {#                <div class="modal__content">#}
+    {#                    <div class="modal__body">#}
+    {#                        <div class="modal__container">#}
+    {#                            <img class="modal-success__icon" src="img/content/checked-success.svg" alt="#">#}
+    {#                            <h4 class="modal-success__title">Product was added</h4>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <div class="modal-compact__buttons">#}
+    {#                        <div class="modal-compact__button-item">#}
+    {#                            <button class="modal-compact__button button" data-dismiss="modal" data-modal="#addProduct"><span class="button__text">Add new product</span>#}
+    {#                            </button>#}
+    {#                        </div>#}
+    {#                        <div class="modal-compact__button-item">#}
+    {#                            <button class="modal-compact__button button" data-dismiss="modal"><span class="button__text">Close</span>#}
+    {#                            </button>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+{% endblock %}

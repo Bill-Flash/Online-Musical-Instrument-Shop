@@ -1,0 +1,191 @@
+{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="static/css/slick.css">#}
+    <!-- all plugins here -->
+{#    <script src="static/js/vendor.js"></script>#}
+    <!-- main js  -->
+{#    <script src="static/js/main.js"></script>#}
+
+{#    <script src="static/js/modernizr-2.8.3.min.js"></script>#}
+{#    <script src="static/js/jquery-1.12.0.min.js"></script>#}
+{#    <script src="static/js/jquery-ui.min.js"></script>#}
+{#    <script src="static/js/popper.js"></script>#}
+{#    <script src="static/js/bootstrap.min.js"></script>#}
+{#    <script src="static/js/jquery.counterup.min.js"></script>#}
+{#    <script src="static/js/waypoints.min.js"></script>#}
+{#    <script src="static/js/elevetezoom.js"></script>#}
+{#    <script src="static/js/ajax-mail.js"></script>#}
+{#    <script src="static/js/owl.carousel.min.js"></script>#}
+{#    <script src="static/js/plugins.js"></script>#}
+{#    <script src="static/js/shop.js"></script>#}
+{#    <script src="static/js/slider.js"></script>#}
+{% endblock %}
+{% block content %}
+{{ super() }}
+        <div class="about-us-area pt-100 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="about-us-img pr-30 wow fadeInLeft">
+                            <img alt="" src="static/img/banner/banner-3.png">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 d-flex align-items-center">
+                        <div class="about-us-content">
+                            <h2>{{ _("About ")}}VERY</h2>
+                            <p>{{ _("In the past 50 years, Very shop has gradually developed from a small and obscure
+                             piano production factory to Very company. whose main economic and technical indexes rank
+                              first in the same industry in London and whose production and sales scale has jumped to
+                               the first place in the world.") }}</p>
+                            <div class="about-us-list">
+                                <ul>
+                                    <li>{{ _("The trademark of Very company was awarded.")}}</li>
+                                    <li>{{ _("Contrary to popular belief is not simply")}}</li>
+                                    <li>{{ _("Increasing brand value")}} </li>
+                                    <li>{{ _("If you have any question, please email us: ") }}729158215@qq.com</li>
+                                    <li>{{ _("If you have login, please directly chat with us by clicking the following button.") }}</li>
+                                </ul>
+                            </div>
+                            <div class="about-us-btn">
+                                <a class="btn-style" href="/chat">{{ _("CONTACT US") }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-count-area pb-70 pt-100 gray-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="single-count mb-30 text-center">
+                            <h2 class="count">18</h2>
+                            <span>{{ _("Years in Business") }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="single-count mb-30 text-center">
+                            <h2 class="count">90%</h2>
+                            <span>{{ _("Satisfaction") }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="single-count mb-30 text-center">
+                            <h2 class="count">24</h2>
+                            <span>{{ _("Billion Sales") }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="single-count mb-30 text-center">
+                            <h2 class="count">17</h2>
+                            <span>{{ _("Award Winning") }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{#		<div class="testimonial-area pt-90 pb-70 bg-img" style="background-image:url(static/img/banner/banner-1.jpg);">#}
+{#		    <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-10 ml-auto mr-auto">#}
+{#                        <div class="testimonial-wrap">#}
+{#                            <div class="testimonial-text-slider text-center">#}
+{#                                <div class="sin-testiText">#}
+{#                                    <p>Lorem ipsum dolor sit amet, co adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercita ullamco laboris nisi ut aliquip ex ea commodo</p>#}
+{#                                </div>#}
+{#                                <div class="sin-testiText">#}
+{#                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or amro porano ja cai tomi tai go amro porano  amro porano ja cai tomi tai go  .... </p>#}
+{#                                </div>#}
+{#                                <div class="sin-testiText">#}
+{#                                    <p>Lorem ipsum dolor sit amet, co adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercita ullamco laboris nisi ut aliquip ex ea commodo</p>#}
+{#                                </div>#}
+{#                                <div class="sin-testiText">#}
+{#                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or amro porano ja cai tomi tai go amro porano  amro porano ja cai tomi tai go  .... </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="testimonial-image-slider text-center">#}
+{#                                <div class="sin-testiImage">#}
+{#                                    <img src="static/img/testi/3.jpg" alt="">#}
+{#                                    <h3>Samia Robiul</h3>#}
+{#                                    <h5>Customer</h5>#}
+{#                                </div>#}
+{#                                <div class="sin-testiImage">#}
+{#                                    <img src="static/img/testi/4.jpg" alt="">#}
+{#                                    <h3>Samia Robiul</h3>#}
+{#                                    <h5>Customer</h5>#}
+{#                                </div>#}
+{#                                <div class="sin-testiImage">#}
+{#                                    <img src="static/img/testi/3.jpg" alt="">#}
+{#                                    <h3>F H Shuvo</h3>#}
+{#                                    <h5>Developer</h5>#}
+{#                                </div>#}
+{#                                <div class="sin-testiImage">#}
+{#                                    <img src="static/img/testi/5.jpg" alt="">#}
+{#                                    <h3>T T Rayed</h3>#}
+{#                                    <h5>CEO</h5>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="testimonial-shap">#}
+{#                                <img src="static/img/icon-img/testi-shap.png" alt="">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#		</div>#}
+		<div class="team-ara pt-95 pb-70">
+            <div class="container">
+                <div class="section-title text-center mb-55">
+                    <h2>{{ _("OUR TEAM") }}</h2>
+                    <p>{{ _("We are comprised of fantastic staffs.") }}</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="team-wrapper mb-30">
+                            <div class="team-img">
+                                <img src="static/img/team/team-1.jpg" alt="">
+                            </div>
+                            <div class="team-content text-center">
+                                <h4>{{ _("Adam Jonson") }}</h4>
+                                <span>{{ _("Manager") }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="team-wrapper mb-30">
+                            <div class="team-img">
+                                <img src="static/img/team/team-4.jpg" alt="">
+                            </div>
+                            <div class="team-content text-center">
+                                <h4>{{ _("Rose Evans") }}</h4>
+                                <span>{{ _("Shopping Guide ")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="team-wrapper mb-30">
+                            <div class="team-img">
+                                <img src="static/img/team/team-3.jpg" alt="">
+                            </div>
+                            <div class="team-content text-center">
+                                <h4>{{ _("Bruce Cole") }}</h4>
+                                <span>{{ _("Customer Service") }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="team-wrapper mb-30">
+                            <div class="team-img">
+                                <img src="static/img/team/team-2.jpg" alt="">
+                            </div>
+                            <div class="team-content text-center">
+                                <h4>{{ _("Debra Lane") }}</h4>
+                                <span>{{ _("Deliveryman") }} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

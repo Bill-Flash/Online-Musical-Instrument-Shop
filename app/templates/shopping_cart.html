@@ -1,0 +1,219 @@
+{% extends "customerBase.html" %}
+{% block head %}
+    {{ super() }}
+    <!-- all plugins here -->
+{#    <script src="static/js/vendor.js"></script>#}
+    <!-- main js  -->
+{#    <script src="static/js/main.js"></script>#}
+
+{#    <script src="static/js/modernizr-2.8.3.min.js"></script>#}
+{#    <script src="static/js/jquery-1.12.0.min.js"></script>#}
+{#    <script src="static/js/jquery-ui.min.js"></script>#}
+{#    <script src="static/js/popper.js"></script>#}
+{#    <script src="static/js/bootstrap.min.js"></script>#}
+{#    <script src="static/js/jquery.counterup.min.js"></script>#}
+{#    <script src="static/js/waypoints.min.js"></script>#}
+{#    <script src="static/js/elevetezoom.js"></script>#}
+{#    <script src="static/js/ajax-mail.js"></script>#}
+{#    <script src="static/js/owl.carousel.min.js"></script>#}
+{#    <script src="static/js/plugins.js"></script>#}
+{#    <script src="static/js/shop.js"></script>#}
+{#    <script src="static/js/slider.js"></script>#}
+{% endblock %}
+{% block content %}
+{{ super() }}
+         <!-- shopping-cart-area start -->
+        <div class="cart-main-area pt-95 pb-100">
+            <div class="container">
+                <h3 class="page-title">{{ _("Your cart items") }}</h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                {{ _("Select") }}
+                                            </th>
+                                            <th>{{ _("Image") }}</th>
+                                            <th>{{ _("Product Name") }}</th>
+                                            <th>{{ _("Unit Price") }}</th>
+                                            <th>{{ _("Qty") }}</th>
+                                            <th>{{ _("Subtotal") }}</th>
+                                            <th>{{ _("Delete") }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if shoppings %}
+                                        {% if request.cookies.get('locale') == 'zh_Hans_CN' %}
+                                            {% for shopping in shoppings %}
+                                                <tr name="{{ shopping.shopping_product.product_id }}">
+                                                    <td class="{{ shopping.shopping_product.product_state }}">
+                                                        <input type="checkbox" class="checkbox-cart">
+                                                    </td>
+                                                    <td class="product-thumbnail">
+                                                        <a href="{{ "/product_detail/id%3D%23{}".format(shopping.shoppingProduct_id | replace('#', '') )}}"><img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.shopping_product.product_imgs.first().img_path)) }}" alt=""></a>
+                                                    </td>
+                                                    <td class="product-name"><a href="{{ "/product_detail/id%3D%23{}".format(shopping.shoppingProduct_id | replace('#', '') )}}">{{ shopping.shopping_product.name_chinese }}</a></td>
+                                                    <td class="product-price-cart"><span class="amount">${{ shopping.shopping_product.product_price }}</span></td>
+                                                    <td class="product-quantity">
+                                                        <button type="button" class="btn btn-outline-dark minus-num" style="float: left; padding: 0 1em; height: 2.85em">-</button>
+                                                        <div class="cart-plus-minus" style="float:left; width: 2.5em;">
+                                                            <input class="cart-plus-minus-box" style="width: 2.5em" type="text"  name="qtybutton" value="{{ shopping.number }}">
+                                                        </div>
+                                                        <button type="button" class="btn btn-outline-dark plus-num" style="float: left; padding: 0 1em; height: 2.85em">+</button>
+                                                    </td>
+                                                    <td class="product-subtotal">${{ shopping.shopping_product.product_price * shopping.number }}</td>
+                                                    <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for shopping in shoppings %}
+                                                <tr name="{{ shopping.shopping_product.product_id }}">
+                                                    <td class="{{ shopping.shopping_product.product_state }}">
+                                                        <input type="checkbox" class="checkbox-cart">
+                                                    </td>
+                                                    <td class="product-thumbnail">
+                                                        <a href="{{ "/product_detail/id%3D%23{}".format(shopping.shoppingProduct_id | replace('#', '') )}}"><img src="{{ url_for('static', filename='img/product/pic/{}'.format(shopping.shopping_product.product_imgs.first().img_path)) }}" alt=""></a>
+                                                    </td>
+                                                    <td class="product-name"><a href="{{ "/product_detail/id%3D%23{}".format(shopping.shoppingProduct_id | replace('#', '') )}}">{{ shopping.shopping_product.product_name }}</a></td>
+                                                    <td class="product-price-cart"><span class="amount">${{ shopping.shopping_product.product_price }}</span></td>
+                                                    <td class="product-quantity">
+                                                        <button type="button" class="btn btn-outline-dark minus-num" style="float: left; padding: 0 1em; height: 2.85em">-</button>
+                                                        <div class="cart-plus-minus" style="float:left; width: 2.5em;">
+                                                            <input class="cart-plus-minus-box" style="width: 2.5em" type="text"  name="qtybutton" value="{{ shopping.number }}">
+                                                        </div>
+                                                        <button type="button" class="btn btn-outline-dark plus-num" style="float: left; padding: 0 1em; height: 2.85em">+</button>
+                                                    </td>
+                                                    <td class="product-subtotal">${{ shopping.shopping_product.product_price * shopping.number }}</td>
+                                                    <td class="product-remove"><a class="btn btn-outline-light" style="border-radius: 2em"><i class="ti-trash"></i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="6">
+                                                <h1 style="text-align: center">
+                                                    <strong>{{ _("No Item In Your Cart. Have A")}} <a style="color: #00a9da" href="{{ url_for('customer.shop_page') }}">{{ _("LooK") }}</a>!</strong>
+                                                </h1>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cart-shiping-update-wrapper">
+                                        <div class="cart-shiping-update">
+                                            <a href="/shop_page">{{ _("Continue Shopping") }}</a>
+{#                                            <button>Update Shopping Cart</button>#}
+                                        </div>
+{#                                        <div class="cart-clear">#}
+{#                                            <button id="cart_clear" type="button" class="btn btn-outline-dark" >CLEAR SHOPPING CART</button>#}
+{#                                        </div>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    <div id="conclude" class="card">
+                        <div id="cart-toolbar">
+                            <div id="left-tools">
+                                <div style="display: flex; width: 6em;">
+                                    <input type="checkbox" style="height: 100%; margin-right: 0.5em" id="select-all">
+                                    <label class="form-check-label" style="margin: auto" for="select-all">
+                                        {{ _("Select All") }}
+                                    </label>
+                                </div>
+                                <div>
+                                    <button id="delete-select" type="button" class="btn btn-outline-primary">
+                                        {{ _("Delete Selected") }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="right-tools">
+                                <div style="height: 100%; display: flex; justify-content: space-around">
+                                    <p class="font-weight-light" style="margin: auto">{{ _("Total cost") }}: </p>
+                                    <p id="total-cost" class="" style="margin: auto; padding-left: 1em; padding-right: 2em">$0</p>
+                                </div>
+                                <div style="height: 100%">
+                                    <a style="display: flex; align-items: center" id="order-select" class="btn">{{ _("Purchase") }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+{#                    </div>#}
+{#                        <div class="row">#}
+{#                            <div class="col-lg-4 col-md-6">#}
+{#                                <div class="cart-tax">#}
+{#                                    <h4 class="cart-bottom-title">Estimate Shipping And Tax</h4>#}
+{#                                    <div class="tax-wrapper">#}
+{#                                        <p>Enter your destination to get a shipping estimate.</p>#}
+{#                                        <div class="tax-select-wrapper">#}
+{#                                            <div class="tax-select">#}
+{#                                                <label>#}
+{#                                                    Country#}
+{#                                                </label>#}
+{#                                                <select class="email s-email s-wid">#}
+{#                                                    <option>Bangladesh</option>#}
+{#                                                    <option>Albania</option>#}
+{#                                                    <option>Åland Islands</option>#}
+{#                                                    <option>Afghanistan</option>#}
+{#                                                    <option>Belgium</option>#}
+{#                                                </select>#}
+{#                                            </div>#}
+{#                                            <div class="tax-select">#}
+{#                                                <label>#}
+{#                                                    State/Province#}
+{#                                                </label>#}
+{#                                                <select class="email s-email s-wid">#}
+{#                                                    <option>Bangladesh</option>#}
+{#                                                    <option>Albania</option>#}
+{#                                                    <option>Åland Islands</option>#}
+{#                                                    <option>Afghanistan</option>#}
+{#                                                    <option>Belgium</option>#}
+{#                                                </select>#}
+{#                                            </div>#}
+{#                                            <div class="tax-select">#}
+{#                                                <label>#}
+{#                                                    Zip/Postal Code#}
+{#                                                </label>#}
+{#                                                <input type="text" placeholder="1234567">#}
+{#                                            </div>#}
+{#                                            <button class="cart-btn-2" type="submit">Get A Quote</button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-4 col-md-6">#}
+{#                                <div class="discount-code-wrapper">#}
+{#                                    <h4 class="cart-bottom-title">DISCOUNT CODES</h4>#}
+{#                                    <div class="discount-code">#}
+{#                                        <p>Enter your coupon code if you have one.</p>#}
+{#                                        <form>#}
+{#                                            <input type="text" required="" name="name">#}
+{#                                            <button class="cart-btn-2" type="submit">Get A Quote</button>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-4 col-md-12">#}
+{#                                <div class="grand-totall">#}
+{#                                    <span>Subtotal:   $155.00</span>#}
+{#                                    <h5>Grand Total:   $353.00</h5>#}
+{#                                    <a href="#">Proceed To Checkout</a>#}
+{#                                    <p>Checkout with Multiple Addresses</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+            </div>
+            </div>
+
+        </div>
+{% endblock %}
